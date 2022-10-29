@@ -125,11 +125,13 @@ class Game:
                     if msg['action'] == 'send_answer':
                        player.item_action = (msg['item_id'], msg['message']) # (item_id, action(the thing they do with it not the action send_message!))
                 except:
-                    pass
+                    print("Invalid JSON when submitting answer")
             case State.VOTING:
                 try:
                     if msg['action'] == 'send_vote':
-
+                        player.vote = msg['player']
+                except:
+                    print("Invalid JSON when voting")
             case State.CHOOSE_ITEMS:
                 pass
             case State.EVENT_PRESENT:
