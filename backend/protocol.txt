@@ -1,4 +1,4 @@
-Lobby state:
+LOBBY state:
 
     client -> server: connect
     server -> client: 
@@ -23,9 +23,67 @@ Lobby state:
         }
     server -> client:
         {
-            action: 'configure',
-            
+            status: 1,
+            message: <confirmation message>
+
         }
+
+PRESENT_ROOM state:
+
+    server -> client:
+        {
+            'action': 'room_description',
+            'description': <description of room>,
+            'feature': <feature of room>
+        }
+
+SUBMIT_ANSWERS state:
+
+    server -> client:
+        {
+            'action': 'request_answers'
+        }
+    client -> server:
+        {
+            'action': 'send_answer',
+            'message': <the answer that the user typed>
+        }
+
+VOTING state:
+
+    server -> client:
+        {
+            'action': 'request_votes'
+        }
+    client -> server:
+        {
+            'action': 'send_vote',
+            'player': <integer id of player>
+        }
+
+CHOOSE_ITEMS state:
+
+    server -> client:
+        {
+            'action': 'request_item_choice',
+            'options': [
+                {
+                    'id': <item's ID>
+                    'name':  <first item's name>,
+                    'description': <first item's description>,
+                    'adjectives': [<adj 1>, <adj 2>, etc...]
+                },
+                <rest of items here in list>
+            ]
+        }
+    client -> server:
+        {
+            'action': 'choose_item',
+            'choice': <id of item>
+        }
+
+    note: the server will ask each client in turn and wait for their response before asking the next. done in 
+        order of who has most votes. if there are ties, randomise.
 
 Broker:
     POST request ./broker/makecode:
