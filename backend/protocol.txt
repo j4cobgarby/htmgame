@@ -53,7 +53,8 @@ SUBMIT_ANSWERS state:
             'players':
             [
                 {
-                    'user': user_id,
+                    'user': username,
+                    'user_id': user_id,
                     'item': item_id,
                     'message': message
                 },
