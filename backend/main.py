@@ -11,8 +11,8 @@ def loaditems(path):
         lines = f.readlines()
         d = {}
         for i in range(len(lines)):
-            if i % 3 == 0 and i + 2 < len(lines):
-                d[lines[i].strip()] = lines[i+1].strip()
+            if i % 4 == 0 and i + 3 < len(lines):
+                d[lines[i].strip()] = (lines[i+1].strip(), lines[i+2].strip())
         return d
 
 class Character:
@@ -37,7 +37,7 @@ class Game:
         self.players = {}
         self.state = State.LOBBY
 
-        self.srv = WebsocketServer(host="127.0.0.1", port=6483)
+        self.srv = WebsocketServer(host="127.0.0.1", port=6483) # Change this to actual hostname for Pi
         self.srv.set_fn_new_client(self.new_client)
         self.srv.set_fn_message_received(self.message_received)
         self.srv.set_fn_client_left(self.client_left)
@@ -49,7 +49,7 @@ class Game:
         if self.state == State.LOBBY:
             self.players[client.id] = Character("", "")
             server.send_message(client, json.dumps({
-                "status": 0,
+                "status": 1,
                 "message": f"join_success"
             }))
         else:
@@ -82,7 +82,7 @@ class Game:
                     'action': 'request_votes'
                 }))
             case State.CHOOSE_ITEMS:
-                pass
+                
             case State.EVENT_PRESENT:
                 pass
             case State.EVENT_PICK_ITEMS:
