@@ -1,0 +1,28 @@
+Lobby state:
+
+    client -> server: connect
+    server -> client: 
+        on success:
+        {
+            status: 1,
+            message: <confirmation message>
+        }
+        on failure:
+        {
+            status: 0,
+            message: <failure reason>
+        }
+
+    client -> server:
+        {
+            action: 'configure',
+            options: {
+                'name': <desired name>,
+                'playerclass': <desired class>
+            }
+        }
+    server -> client:
+        {
+            action: 'configure',
+            
+        }
