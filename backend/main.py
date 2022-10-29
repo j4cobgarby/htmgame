@@ -47,7 +47,7 @@ class Game:
 
     def new_client(self, client, server):
         if self.state == State.LOBBY:
-            self.players[client.id] = Character("", playerclass)
+            self.players[client.id] = Character("", "")
             server.send_message(client, json.dumps({
                 "status": 0,
                 "message": f"join_success"
@@ -107,7 +107,7 @@ class Game:
                         player.playerclass = msg['options']['playerclass']
                         response['status'] = 1
                         response['message'] = 'configured'
-                    elif msg['action'] = 'start_game':
+                    elif msg['action'] == 'start_game':
                         print(f"Starting game!")
                         response['status'] = 1
                         response['message'] = 'starting'
