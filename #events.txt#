@@ -1,0 +1,24 @@
+A pedestal is in the center of a room. When you place an item on it, it displays its name, and the inscryption indicates you may change a single letter of a single item. Which item, and what letter?
+Permanently changes one letter.
+
+In this room there is a chest with the label 'The Chest of Four Seasons'. You may place an item within. You expect from experience that it will change it in some way.
+Item gains adjective 'Floral', 'BBQd', 'Pumpkin-Spice', or 'Nutmeg-infused'
+
+You spy an item on your travels, and pick it up.
+Gain an item with a random adjective. This should be highly weighted against the others.
+
+While around the campfire with your companions, you are struck by an impulse to put an item over the flames. Which do you choose?
+Delicious/Burnt/Flaming Adjective or turns into 'Pile of Ash'
+
+In this room there is a pool of pure, cool water. You feel an impulse to put an item in. Which item do you choose?
+Anything flaming or certain items become extinguished. Else Clean/Soggy/Solution (end)/Holy
+
+In this room there is a sacrificial altar. You may destroy one item to impart its qualities to another.
+Adds adjectives and item-specific adjective to another item.
+
+In this room is a dark pool with the inscription 'Pool of Annihilation'. It goes on to tell you that you can destroy any one item to gain another.
+Item will have the same number of adjectives.
+
+In this room is a sleasy salesman. She has three wares for you that you can purchase with gold.
+   Three unique items for every person, we'll set prices. If not time, set 1d10. Some element of randomness anyway. Every item has a random adjective.
+
