@@ -1,0 +1,163 @@
+@font-face {
+    font-family: dos;
+    src: url(DOS.ttf);
+}
+
+@font-face {
+    font-family: alkhemikal;
+    src: url(Alkhemikal.ttf);
+}
+
+html, * {
+    font-family: dos;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: rgb(32, 29, 25);
+}
+
+div.wrapper {
+    width: 950px;
+    height: 950px;
+    background-color: rgb(56, 53, 50);
+    border: 4px solid rgb(83, 76, 66);
+    margin: auto;
+    left: 0;
+    right: 0;
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: auto 512px;
+    gap: 15px;
+    padding: 15px;
+}
+
+div.left {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+div.inventory, div.staging {
+    background-color: rgb(39, 35, 32);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+}
+
+div.coins {
+    display: grid;
+    grid-template-columns: 80px auto;
+}
+
+div.coins h2 {
+    padding-left: 15px;
+    text-align: left;
+    line-height: 80px;
+    font-size: 40px;
+}
+
+div.coins img {
+    width: 80px;
+    height: 80px;
+}
+
+div.item {
+    font-size: 19pt;
+    background-color: rgb(17, 17, 16);
+    border: 1px solid rgb(56, 53, 50);
+    color:rgb(238, 221, 198);
+    width: 100%;
+    line-height: 40px;
+    min-height: 40px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+div.item.disabled p {
+    text-align: center;
+    font-style: italic;
+    color: rgb(153, 133, 104);
+}
+
+div.item * {
+    margin: 0;
+}
+
+div.item h2 {
+    text-align: left;
+    margin-left: 5px;
+}
+
+div.item p {
+    margin-left: 20px;
+}
+
+div.item:hover {
+    background-color: rgb(36, 36, 32);
+}
+
+div.item:active {
+    background-color: rgb(56, 56, 47);
+}
+
+div.item.disabled {
+    background-color: rgb(83, 76, 66);
+    cursor: default;
+}
+
+button.submit {
+    background-color: rgb(235, 189, 126);
+    border: none;
+    cursor: pointer;
+    font-size: 18pt;
+    padding: 10px;
+}
+
+button.submit.disabled {
+    cursor: default;
+    background-color: rgb(90, 80, 65);
+    color: rgb(153, 133, 104);
+}
+
+div.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.right img {
+    width: 512px;
+    height: 512px;
+}
+
+div.feature {
+    display: grid;
+    grid-template-columns: 128px auto;
+    gap: 10px;
+}
+
+div.feature img {
+    width: 128px;
+    height: 128px;
+}
+
+p {
+    color:rgb(238, 221, 198);
+    font-size: 18pt;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h1, h2, h3, h4, h5 {
+    color:rgb(235, 189, 126);
+    font-family: alkhemikal;
+    text-align: center;
+    margin: 0;
+}
+
+h1 {
+    font-size: 28pt;
+}
