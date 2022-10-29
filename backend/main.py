@@ -19,7 +19,10 @@ class Character:
     def __init__(self):
         self.name = ""
         self.playerclass = ""
-        self.inv = [] # Array of tuples
+        self.inv = []                   # Array of tuples
+        self.vote = None                # ID of a players vote
+        self.item_action = (None, None) # Item, action
+        self.gold = 0
 
 class State(Enum):
     LOBBY = 1,
@@ -118,7 +121,12 @@ class Game:
             case State.PRESENT_ROOM:
                 pass
             case State.SUBMIT_ANSWERS:
-                pass
+                response = {'status': 0, 'message':''}
+                try:
+                    if msg['action'] == 'send_answer':
+                       player.item_action = msg[''] # Finish this
+                except:
+                    pass
             case State.VOTING:
                 pass
             case State.CHOOSE_ITEMS:
