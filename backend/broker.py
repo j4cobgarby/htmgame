@@ -6,7 +6,7 @@
 # POST request /broker/makecode return code
 # GET request /broker/getip/{code} return IP
 
-import random, json
+import random, json, socket
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -39,4 +39,4 @@ def get_ip(code):
         return json.dumps({'ip': None, 'status': 0})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host=socket.gethostbyname())
