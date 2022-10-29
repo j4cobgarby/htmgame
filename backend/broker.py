@@ -39,4 +39,4 @@ def get_ip(code):
         return json.dumps({'ip': None, 'status': 0})
 
 if __name__ == '__main__':
-    app.run(host=socket.gethostbyname())
+    app.run(host=socket.gethostname())
