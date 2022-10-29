@@ -84,7 +84,7 @@ class Game:
                     'action': 'request_votes'
                 }))
             case State.CHOOSE_ITEMS:
-                
+                pass
             case State.EVENT_PRESENT:
                 pass
             case State.EVENT_PICK_ITEMS:
@@ -123,7 +123,7 @@ class Game:
                 response = {'status': 0, 'message':''}
                 try:
                     if msg['action'] == 'send_answer':
-                       player.item_action = msg[''] # Finish this
+                       player.item_action = (msg['item_id'], msg['message']) # (item_id, action(the thing they do with it not the action send_message!))
                 except:
                     pass
             case State.VOTING:

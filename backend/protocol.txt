@@ -46,6 +46,7 @@ SUBMIT_ANSWERS state:
         {
             'action': 'send_answer',
             'message': <the answer that the user typed>
+            'item_id': <b number>
         }
 
 VOTING state:
