@@ -18,7 +18,7 @@ class Character:
     def __init__(self):
         self.name = ""
         self.playerclass = ""
-        self.inv = []                   # Array of tuples
+        self.inv = []                   # Array of tuples (id, [adj1, adj2, etc.])
         self.vote = None                # ID of a players vote
         self.item_action = (None, None) # Item, action
         self.gold = 0
@@ -127,7 +127,9 @@ class Game:
                 except:
                     pass
             case State.VOTING:
-                pass
+                try:
+                    if msg['action'] == 'send_vote':
+
             case State.CHOOSE_ITEMS:
                 pass
             case State.EVENT_PRESENT:
