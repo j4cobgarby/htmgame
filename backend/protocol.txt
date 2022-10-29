@@ -26,3 +26,31 @@ Lobby state:
             action: 'configure',
             
         }
+
+Broker:
+    POST request ./broker/makecode:
+        returns 
+        {
+            'code': 1234,
+            'status': 1
+        }
+    if IP already in use:
+        returns 
+        {
+            'code': null,
+            'status': 0
+        }
+
+    game code is 4 alphanumeric chars (uppercase)
+    GET request ./broker/getip/<GameCode>:
+        returns 
+        {
+            'ip': <ip address>,
+            'status': 1
+        }
+    if code not found:
+        returns
+        {
+            'ip': null,
+            status: 0
+        }
