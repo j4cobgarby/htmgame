@@ -34,7 +34,7 @@ def makecode():
 @app.route('/broker/getip/<code>')
 def get_ip(code):
     try:
-        return json.dumps({'ip': games[code], 'status': 1})
+        return json.dumps({'ip': games[code.upper()], 'status': 1})
     except KeyError:
         return json.dumps({'ip': None, 'status': 0})
 
