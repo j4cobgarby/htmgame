@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Author: Oliver Malkin
 # Date: 29/10/2022
 # Purpose:
