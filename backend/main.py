@@ -37,7 +37,7 @@ class Game:
         self.players = {}
         self.state = State.LOBBY
 
-        self.srv = WebsocketServer(host="127.0.0.1", port=6483)
+        self.srv = WebsocketServer(host="127.0.0.1", port=6483) # Change this to actual hostname for Pi
         self.srv.set_fn_new_client(self.new_client)
         self.srv.set_fn_message_received(self.message_received)
         self.srv.set_fn_client_left(self.client_left)
@@ -49,7 +49,7 @@ class Game:
         if self.state == State.LOBBY:
             self.players[client.id] = Character("", "")
             server.send_message(client, json.dumps({
-                "status": 0,
+                "status": 1,
                 "message": f"join_success"
             }))
         else:
