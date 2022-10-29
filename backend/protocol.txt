@@ -25,7 +25,6 @@ LOBBY state:
         {
             status: 1,
             message: <confirmation message>
-
         }
 
 PRESENT_ROOM state:

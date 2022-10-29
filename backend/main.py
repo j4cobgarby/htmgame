@@ -11,8 +11,8 @@ def loaditems(path):
         lines = f.readlines()
         d = {}
         for i in range(len(lines)):
-            if i % 3 == 0 and i + 2 < len(lines):
-                d[lines[i].strip()] = lines[i+1].strip()
+            if i % 4 == 0 and i + 3 < len(lines):
+                d[lines[i].strip()] = (lines[i+1].strip(), lines[i+2].strip())
         return d
 
 class Character:
@@ -85,7 +85,7 @@ class Game:
                     'action': 'request_votes'
                 }))
             case State.CHOOSE_ITEMS:
-                pass
+                
             case State.EVENT_PRESENT:
                 pass
             case State.EVENT_PICK_ITEMS:
