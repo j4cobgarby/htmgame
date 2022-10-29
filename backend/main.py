@@ -2,17 +2,16 @@
 
 from websocket_server import WebsocketServer
 import random
-import csv
 from enum import Enum
 import json
 
 def loaditems(path):
     with open(path, "r") as f:
         lines = f.readlines()
-        d = {}
+        d = []
         for i in range(len(lines)):
             if i % 4 == 0 and i + 3 < len(lines):
-                d[lines[i].strip()] = (lines[i+1].strip(), lines[i+2].strip())
+                d.append((lines[i].strip(), lines[i+1].strip(), lines[i+2].strip()))
         return d
 
 class Character:
