@@ -218,6 +218,11 @@ class Game:
             try:
                 if msg['action'] == 'send_answer':
                     self.answers_submitted += 1
+                    for i in player.inv:
+                        if i[0] == msg['item_id']:
+                            player.inv.remove(i)
+                            break
+                    player.inv.remove((msg['item_id'], ))
                     player.item_action = (msg['item_id'], msg['message']) # (item_id, action - the thing they do with it not the action send_message!)
                     if self.answers_submitted >= len(self.players):
                         self.srv.send_message_to_all(json.dumps({
@@ -247,6 +252,7 @@ class Game:
             try:
                 if msg['action'] == 'choose_item':
                     # Remove the selection that the player chose
+                    self.player.inv.append((msg['choice'], []))
                     self.selections.remove((msg['choice'], self.items[msg['choice']]))
                     print(f"{pname} has chosen the item {msg['choice']}")
 
