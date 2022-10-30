@@ -144,3 +144,13 @@ Broker:
             'ip': null,
             status: 0
         }
+
+    POST reqiest ./broker/removeip/<code>:
+        returns
+        {
+            'status': 1
+        }
+    if code not found
+        {
+            'status': 0
+        }

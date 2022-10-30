@@ -133,7 +133,7 @@
 
     <div class="wrapper" id="scene-voting">
         <h1>Who solved the challenge the best?</h1>
-        <div class="vote-players">
+        <div class="vote-players" id="vote-players">
             <div class="vote-player">
                 <img src="img/firepit.png" alt="">
                 <p class="answer">
@@ -175,7 +175,8 @@
 
     <div class="wrapper" id="scene-loot-waiting">
         <h1>Your Party Found Some Loot!</h1>
-        <p>Now patiently wait your turn... or else!</p>
+        <p>Voting has finished. Now patiently wait your turn... <em>or else</em>!</p>
+        <p>(Looting is very civilised and will proceed in order of votes)</p>
     </div>
 
     <div class="wrapper" id="scene-loot-choose">
@@ -212,6 +213,10 @@
                 <p>Do not the cat.</p>
             </div>
         </div>
+    </div>
+
+    <div class="wrapper" id="scene-waiting">
+        <h1>Waiting for others...</h1>
     </div>
 </body>
 </html>
