@@ -234,7 +234,7 @@ class Game:
                         if i[0] == msg['item_id']:
                             player.inv.remove(i)
                             break
-                    player.inv.remove((msg['item_id'], ))
+                    #player.inv.remove((msg['item_id'], ))
                     player.item_action = (msg['item_id'], msg['message']) # (item_id, action - the thing they do with it not the action send_message!)
                     if self.answers_submitted >= len(self.players):
                         self.srv.send_message_to_all(json.dumps({
