@@ -82,3 +82,18 @@ h1, h2, h3, h4, h5 {
 h1 {
     font-size: 34pt;
 }
+
+#scene-end p {
+    text-align: center;
+}
+
+#winner {
+    font-size: 50pt;
+    color:rgb(250, 249, 168);
+    margin: 30px;
+}
+
+.game-over {
+    color: rgb(192, 45, 45);
+    margin-bottom: 30px;
+}
