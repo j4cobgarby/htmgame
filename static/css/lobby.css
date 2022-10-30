@@ -48,3 +48,19 @@ div.wrapper#scene-lobby {
     font-size: 18pt;
     text-align: left;
 }
+
+#scene-lobby input.name-input {
+    font-size: 18pt;
+}
+
+#scene-lobby button.start-game-button {
+    font-size: 19pt;
+    background-color: rgb(17, 17, 16);
+    border: 1px solid rgb(56, 53, 50);
+    color:rgb(238, 221, 198);
+    width: 100%;
+    line-height: 30px;
+    min-height: 30px;
+    padding: 10px;
+    cursor: pointer;
+}
