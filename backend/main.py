@@ -4,6 +4,7 @@ from websocket_server import WebsocketServer
 import random
 from enum import Enum
 import json
+import time
 
 def loaditems(path):
     with open(path, "r") as f:
@@ -74,12 +75,17 @@ class Game:
                     'description': 'Spooky scary room description',
                     'feature': 'A unique and fun feature of the room'
                 }))
+                time.sleep(5)
+                print("Moving on")
+                self.change_state(State.SUBMIT_ANSWERS)
             case State.SUBMIT_ANSWERS:
-                print("Telling clients to send their answers")
+                print("Telling clients to send their answers") 
+                self.answers_submitted = 0
                 self.srv.send_message_to_all(json.dumps({
                     'action': 'request_answers'
                 }))
             case State.VOTING:
+                self.votes_submitted = 0
                 print("Telling clients to send their votes")
                 self.srv.send_message_to_all(json.dumps({
                     'action': 'request_votes'
@@ -160,13 +166,21 @@ class Game:
             case State.SUBMIT_ANSWERS:
                 try:
                     if msg['action'] == 'send_answer':
-                       player.item_action = (msg['item_id'], msg['message']) # (item_id, action - the thing they do with it not the action send_message!)
+                        self.answers_submitted += 1
+                        player.item_action = (msg['item_id'], msg['message']) # (item_id, action - the thing they do with it not the action send_message!)
+                        if self.answers_submitted >= len(self.players):
+                            time.sleep(1)
+                            change_state(State.VOTING)
                 except:
                     print("Invalid JSON when submitting answer")
             case State.VOTING:
                 try:
                     if msg['action'] == 'send_vote':
+                        self.votes_submitted += 1
                         player.vote = msg['player'] # This is the ID of the player
+                        if self.votes_submitted >= len(self.players):
+                            time.sleep(1)
+                            change_state(State.CHOOSE_ITEMS)
                 except:
                     print("Invalid JSON when voting")
             case State.CHOOSE_ITEMS:
@@ -192,6 +206,10 @@ class Game:
                                             'adjectives': []
                                         } for choice in enumerate(selections)]
                                     }))
+                        else:
+                            print("All players chosen items now :)")
+                            time.sleep(1)
+                            change_state(State.PRESENT_ROOM)
                 except:
                     print("Invalid JSON when choosing item")
             case State.EVENT_PRESENT:
