@@ -546,3 +546,80 @@ var roomImages = [
     "adder.png",
     "poltergeist.png",
 ]
+
+
+
+var featureData = [
+    {
+        "description": "This room contains a smouldering fire-pit.",
+        "img": "firepit.png",
+    },
+    {
+        "description": "A small stream flows through this room.",
+        "img": "stream.png",
+    },
+    {
+        "description": "You spot some loose rubble you could easily grab in this room.",
+        "img": "bricks.png",
+    },
+    {
+        "description": "Some quite sturdy vines hang off these walls that you could cut off.",
+        "img": "vines.png",
+    },
+    {
+        "description": "A patch of magical mould grows on this wall. Its spores are highly hallucinogenic. When its pulp is mixed with urine, it creates a solvent that does little to flesh, but rapidly dissolves inorganic matter.",
+        "img": "mould.png",
+    },
+    {
+        "description": "There is a writing desk, with a curious raven standing upon it.",
+        "img": "desk.png",
+    },
+    {
+        "description": "There is a highly distracting mural in this room.",
+        "img": "mural.png",
+    },
+    {
+        "description": "In this room there is a conspicuous lack of decoration.",
+        "img": "lack-of-scenery.png",
+    },
+    {
+        "description": "There is a prominent trapdoor in this room.",
+        "img": "trapdoor.png",
+    },
+    {
+        "description": "There is a long corridor leading to seemingly nowhere in this room.",
+        "img": "corridor.png",
+    },
+    {
+        "description": "On the wall, there is a mysterious pattern of three slits in the wall.",
+        "img": "slits.png",
+    },
+    {
+        "description": "In this room, there are various statues that closely resemble you and your companions.",
+        "img": "statue.png",
+    },
+    {
+        "description": "In this room there is a skylight, that beams sunlight down on a sundial below.",
+        "img": "sundial.png",
+    },
+    {
+        "description": "There is vegetation growing in cracks in this room that you recognise as herbs, suitable as a garnish.",
+        "img": "herbs.png",
+    },
+    {
+        "description": "This room contains stalactites. Or stalagmites. Honestly, you do not know the difference.",
+        "img": "stalactites.png",
+    },
+    {
+        "description": "This room contains an ancient forge that could be ignited to forge metal objects.",
+        "img": "furnace.png",
+    },
+    {
+        "description": "This room is cold, and covered with snow. It seems someone has crafted a crude inanimate simulacrum of a person, using snow, coal, and a carrot strangely placed in the middle of the face.",
+        "img": "snowman.png",
+    },
+    {
+        "description": "There is a chest here that curiously has poorly-hidden teeth and eyes.",
+        "img": "mimic.png",
+    },
+]

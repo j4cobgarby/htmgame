@@ -172,6 +172,15 @@ function renderScenario() {
 
     document.getElementById("answer-description").innerHTML = roomDescriptions[scenario]
     document.getElementById("answer-img").src = "img/scenes/" + roomImages[scenario]
+
+    document.getElementById("feature-description").innerHTML = featureData[feature].description
+    document.getElementById("feature-img").src = "img/features/" + featureData[feature].img
+
+    document.getElementById("feature-description-1").innerHTML = featureData[feature].description
+    document.getElementById("feature-img-1").src = "img/features/" + featureData[feature].img
+
+    document.getElementById("feature-description-2").innerHTML = featureData[feature].description
+    document.getElementById("feature-img-2").src = "img/features/" + featureData[feature].img
 }
 
 function renderSelection() {
