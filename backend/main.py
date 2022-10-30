@@ -245,8 +245,7 @@ class Game:
                             'players': [
                                 {
                                     'user': self.players[p].name,
-                                    'user_id': p,
-                                    'class': self.players[p].playerclass,
+                                    'user_id': p,,
                                     'item': self.players[p].item_action[0],
                                     'message': self.players[p].item_action[1],
                                 } for p in self.players
