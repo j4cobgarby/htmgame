@@ -4,6 +4,14 @@ div.wrapper#scene-lobby {
     gap: 15px;
 }
 
+@media only screen and (max-device-width: 480px) {
+    div.wrapper#scene-lobby {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
 #scene-lobby div#classes {
     background-color: rgb(39, 35, 32);
     padding: 10px;

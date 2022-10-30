@@ -84,10 +84,14 @@ class Game:
                 print("Changing to lobby.")
                 self.srv.allow_new_connections()
             case State.PRESENT_ROOM:
+                desc_id = random.randint(0, len(self.descriptions))
+                feat_id = random.randint(0, len(self.features))
                 self.srv.send_message_to_all(json.dumps({
                     'action': 'room_description',
-                    'description': random.choice(self.descriptions),
-                    'feature': random.choice(self.features)
+                    'description_id': desc_id,
+                    'feature_id': feat_id,
+                    'description': self.descriptions[desc_id],
+                    'feature': self.features[feat_id]
                 }))
                 print("Moving on")
                 self.change_state(State.SUBMIT_ANSWERS)

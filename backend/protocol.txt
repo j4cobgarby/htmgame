@@ -45,7 +45,9 @@ PRESENT_ROOM state:
         {
             'action': 'room_description',
             'description': <description of room>,
-            'feature': <feature of room>
+            'description_id': <description number>,
+            'feature': <feature of room>,
+            'feature_id': <feature number>
         }
 
 SUBMIT_ANSWERS state:
