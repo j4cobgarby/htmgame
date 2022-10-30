@@ -216,7 +216,7 @@ class Game:
                                     'user': p[1].name,
                                     'user_id': p[0],
                                     'item': p[1].item_action[0],
-                                    'message': p[1].item_action[1]: 
+                                    'message': p[1].item_action[1],
                                 } for p in self.players
                             ]
                         }))
