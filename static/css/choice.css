@@ -11,6 +11,10 @@ div.wrapper#scene-choice {
     gap: 10px;
 }
 
+#scene-choice div.right {
+    gap: 20px;
+}
+
 #scene-choice div.inventory, div.staging {
     background-color: rgb(39, 35, 32);
     display: flex;

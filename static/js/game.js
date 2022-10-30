@@ -1,3 +1,6 @@
+var scenario = 4
+var feature = 0
+
 var invMax = 4
 var gold = 7
 var selection = null
@@ -14,7 +17,8 @@ var items = [
 ]
 
 function onLoad() {
-    // renderInventory()
+    renderInventory()
+    renderScenario()
     renderClassList()
 }
 
@@ -27,6 +31,18 @@ function renderInventory() {
     for (var item of items) {
         inv.appendChild(inventoryItem(item))
     }
+}
+
+function renderScenario() {
+    document.getElementById("setting-description").innerHTML = roomDescriptions[scenario]
+    document.getElementById("setting-img").src = "img/scenes/" + roomImages[scenario]
+
+    document.getElementById("choice-description").innerHTML = roomDescriptions[scenario]
+    document.getElementById("choice-img").src = "img/scenes/" + roomImages[scenario]
+    document.getElementById("choice-classname").innerHTML = classData[selectedClass].name
+
+    document.getElementById("answer-description").innerHTML = roomDescriptions[scenario]
+    document.getElementById("answer-img").src = "img/scenes/" + roomImages[scenario]
 }
 
 function renderSelection() {
