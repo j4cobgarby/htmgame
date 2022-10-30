@@ -261,9 +261,9 @@ function submitSolution() {
 function showLootOptions(lootOptions) {
     var container = document.getElementById("loot-choices")
     container.innerHTML = ""
+    document.getElementById("scene-loot-choose").hidden = false
 
     for (var option of lootOptions) {
-        alert(option)
         var el = document.createElement("div")
         el.className = "item"
         container.append(el)
