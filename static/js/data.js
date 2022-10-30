@@ -2,62 +2,74 @@ var classData = [
     {
         "name": "Dr. Professor, PhD",
         "category": "Smart",
-        "description": "As a smart doctor professor with a doctorate, you possess unbounded intelligence. Your power lies in binding unrelated things together and deducing what will happen before you do it."
+        "description": "As a smart doctor professor with a doctorate, you possess unbounded intelligence. Your power lies in binding unrelated things together and deducing what will happen before you do it.",
+        "sprite": "prof.png",
     },
     {
         "name": "Sage Mage",
         "category": "Smart",
-        "description": "You are a wise wizard whose power is in herbs and spices. Most of all, the sacred herb of Sage. Your power lies in giving flavour and life as well as using your wisdom to anticipate the result of your actions."
+        "description": "You are a wise wizard whose power is in herbs and spices. Most of all, the sacred herb of Sage. Your power lies in giving flavour and life as well as using your wisdom to anticipate the result of your actions.",
+        "sprite": "sage.png",
     },
     {
         "name": "The Quantum Mechanic",
         "category": "Smart",
-        "description": "You are a tremendous bore who makes up literally everything. Your power is in the fine-tuning of inscrutable mechanisms in the universe, such as by quantum tunneling between two places and by observation lock in a particular result to your actions."
+        "description": "You are a tremendous bore who makes up literally everything. Your power is in the fine-tuning of inscrutable mechanisms in the universe, such as by quantum tunneling between two places and by observation lock in a particular result to your actions.",
+        "sprite": "quantum.png",
     },
     {
         "name": "Swashbuckler",
         "category": "Strong",
-        "description": "You are a strong and charismatic go-getter who does not buckle under pressure and swashes using buckles. Your power is lassoing and thwacking using your belt of belting and overpowering obstacles using sheer brute strength."
+        "description": "You are a strong and charismatic go-getter who does not buckle under pressure and swashes using buckles. Your power is lassoing and thwacking using your belt of belting and overpowering obstacles using sheer brute strength.",
+        "sprite": "swashbuckler.png",
     },
     {
         "name": "Barber-ian",
         "category": "Strong",
-        "description": "You are rage-filled hairstylist whose passion is style and whose style is passion. Your power is using versatile hairgel to do basically any function of hygiene, style, or other and using brute strength to overpower your foes."
+        "description": "You are rage-filled hairstylist whose passion is style and whose style is passion. Your power is using versatile hairgel to do basically any function of hygiene, style, or other and using brute strength to overpower your foes.",
+        "sprite": "barberian.png",
     },
     {
         "name": "Strongman",
         "category": "Strong",
-        "description": "You are a strong strongman who was not at all strongarmed into the circus. Your power is in using your extra-nifty moustache that is a handlebar in more than one sense and overpowering obstacles using your rippling muscular brute strength."
+        "description": "You are a strong strongman who was not at all strongarmed into the circus. Your power is in using your extra-nifty moustache that is a handlebar in more than one sense and overpowering obstacles using your rippling muscular brute strength.",
+        "sprite": "strongman.png",
     },
     {
         "name": "Magician",
         "category": "Sneaky",
-        "description": "You are a stage magician whose power is in their props and the quickness of their hands rather than true magic. You have an endless handkerchief and can fashion objects into shivs and lockpicks."
+        "description": "You are a stage magician whose power is in their props and the quickness of their hands rather than true magic. You have an endless handkerchief and can fashion objects into shivs and lockpicks.",
+        "sprite": "magician.png",
     },
     {
         "name": "Rouge [Sic]",
         "category": "Sneaky",
-        "description": "You are either dyslexic, or a sneaky red-themed scoundrel. Your power is in tempting yet deadly redness, and fashioning regular objects into weapons or lockpicks."
+        "description": "You are either dyslexic, or a sneaky red-themed scoundrel. Your power is in tempting yet deadly redness, and fashioning regular objects into weapons or lockpicks.",
+        "sprite": "rouge.png"
     },
     {
         "name": "Cookie-jar Pilferer",
         "category": "Sneaky",
-        "description": "You are a no-good brat who does what they want and blames it on the dog. Your power is in your larcenous sticky fingers and your ability to fashion household objects into dangerous objects and thieves' tools."
+        "description": "You are a no-good brat who does what they want and blames it on the dog. Your power is in your larcenous sticky fingers and your ability to fashion household objects into dangerous objects and thieves' tools.",
+        "sprite": "cookiejar.png",
     },
     {
         "name": "Astronomer",
         "category": "Saintly",
-        "description": "You are a definitely legitimate science professional who uses the stars to know things about reality. Your power is in prediction and observation using your horrific telescope and your ability to use your knowledge of mag-science to keep an object in working order."
+        "description": "You are a definitely legitimate science professional who uses the stars to know things about reality. Your power is in prediction and observation using your horrific telescope and your ability to use your knowledge of mag-science to keep an object in working order.",
+        "sprite": "astronomer.png",
     },
     {
         "name": "Cult Leader",
         "category": "Saintly",
-        "description": "You are a charismatic leader whose power is installing religious fervour in your minions and having a minion find replacements for broken objects."
+        "description": "You are a charismatic leader whose power is installing religious fervour in your minions and having a minion find replacements for broken objects.",
+        "sprite": "cult.png"
     },
     {
         "name": "Bar Nun",
         "category": "Saintly",
-        "description": "You are a purveyor of spirits of many varieties, a barlady of the cloth. You are the best... Bar Nun.  Your power is bestowing holy drinks and blessing objects to never break."
+        "description": "You are a purveyor of spirits of many varieties, a barlady of the cloth. You are the best... Bar Nun.  Your power is bestowing holy drinks and blessing objects to never break.",
+        "sprite": "barnun.png"
     }
 ]
 

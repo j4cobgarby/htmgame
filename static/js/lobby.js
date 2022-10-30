@@ -50,6 +50,7 @@ function renderClassList() {
     document.getElementById("lobby-class").innerHTML = classData[selectedClass].description
     document.getElementById("start-item").innerHTML = itemsData[selectedClass].name
     document.getElementById("cat-feat").innerHTML = classData[selectedClass].category + ": " + categoryData[classData[selectedClass].category]
+    document.getElementById("lobby-sprite").src = "img/sprites/" + classData[selectedClass].sprite
 }
 
 function makeClassButton(index) {
