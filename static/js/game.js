@@ -28,7 +28,7 @@ var ws
 var inventory = []
 
 function onLoad() {
-    ws = new WebSocket("ws://localhost:6483")
+    ws = new WebSocket("ws://oliver:6483")
 
     ws.addEventListener('message', (event) => {
         console.log('msg: ', event.data)
@@ -58,13 +58,11 @@ function onLoad() {
         case "all_answers":
             changeState("answer")
             answers = data.players
-
             showAllAnswers(0)
             break
         case "looting_begin":
             changeState("loot-waiting")
             break
-            
         case "request_item_choice":
             changeState("loot_choose")
             lootOptions = data.options
