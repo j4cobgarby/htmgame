@@ -64,6 +64,7 @@ SUBMIT_ANSWERS state:
         }
     server -> client:
         {
+            'action': 'all_answers',
             'players':
             [
                 {

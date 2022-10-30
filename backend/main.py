@@ -209,6 +209,17 @@ class Game:
                         self.answers_submitted += 1
                         player.item_action = (msg['item_id'], msg['message']) # (item_id, action - the thing they do with it not the action send_message!)
                         if self.answers_submitted >= len(self.players):
+                            self.svr.send_message_to_all(json.dumps({
+                                'action': 'all_answers',
+                                'players': [
+                                    {
+                                        'user': p[1].name,
+                                        'user_id': p[0],
+                                        'item': p[1].item_action[0],
+                                        'message': p[1].item_action[1]: 
+                                    } for p in self.players
+                                ]
+                            }))
                             self.change_state(State.VOTING)
                 except KeyError:
                     print("Invalid JSON when submitting answer")
