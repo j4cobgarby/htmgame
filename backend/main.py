@@ -88,12 +88,12 @@ class Game:
             print("Changing to lobby.")
             self.srv.allow_new_connections()
         elif self.state == State.PRESENT_ROOM:
-            if self.rooms_visited >= 3:
+            if self.rooms_visited >= 4:
                 best_player = None
                 max_gold = 0
                 for i in self.players:
                     if self.players[i].gold > max_gold:
-                        best_player = self.players[i].name
+                        best_player = i
                         max_gold = self.players[i].gold
                 self.srv.send_message_to_all(json.dumps({
                     'action': 'winner',
@@ -246,6 +246,7 @@ class Game:
                                 {
                                     'user': self.players[p].name,
                                     'user_id': p,
+                                    'class': self.players[p].playerclass,
                                     'item': self.players[p].item_action[0],
                                     'message': self.players[p].item_action[1],
                                 } for p in self.players
@@ -267,7 +268,7 @@ class Game:
             try:
                 if msg['action'] == 'choose_item':
                     # Remove the selection that the player chose
-                    player.inv.append((msg['choice'], []))
+                    self.player.inv.append((msg['choice'], []))
                     self.selections.remove((msg['choice'], self.items[msg['choice']]))
                     print(f"{pname} has chosen the item {msg['choice']}")
 
