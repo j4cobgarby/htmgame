@@ -28,7 +28,7 @@ var ws
 var inventory = []
 
 function onLoad() {
-    ws = new WebSocket("ws://localhost:6483")
+    ws = new WebSocket("ws://oliver:6483")
 
     ws.addEventListener('message', (event) => {
         console.log('msg: ', event.data)
