@@ -46,3 +46,12 @@
 #scene-voting button.submit:active {
     background-color: rgb(247, 221, 185);
 }
+
+@media only screen and (max-device-width: 480px) {
+    #scene-voting div.vote-players {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: unset;
+        height: auto;
+    }
+}

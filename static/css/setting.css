@@ -20,3 +20,19 @@
     width: 128px;
     height: 128px;
 }
+
+@media only screen and (max-device-width: 480px) {
+    #scene-setting div.feature {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    #scene-setting div.top {
+        display: flex;
+        flex-direction: column;
+    }
+    #scene-setting div.feature img {
+        width: auto;
+        height: unset;
+    }
+}
