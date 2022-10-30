@@ -19,6 +19,7 @@ var sceneNames = [
     "loot-waiting",
     "loot-choose",
     "waiting",
+    "end",
 ]
 
 var state = "lobby"
@@ -67,12 +68,17 @@ function onLoad() {
             lootOptions = data.options
             showLootOptions(lootOptions)
             break
+        case "winner":
+            changeState("end")
+            document.getElementById("winner").innerHTML = data.winner
+            document.getElementById("winner-gold").innerHTML = data.gold
+            break
         }
     })
 
     renderClassList()
 
-    changeState("lobby")
+    // changeState("lobby")
 }
 
 function changeState(to) {
