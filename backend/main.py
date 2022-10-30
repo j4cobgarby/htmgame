@@ -88,12 +88,12 @@ class Game:
             print("Changing to lobby.")
             self.srv.allow_new_connections()
         elif self.state == State.PRESENT_ROOM:
-            if self.rooms_visited >= 4:
+            if self.rooms_visited >= 3:
                 best_player = None
                 max_gold = 0
                 for i in self.players:
                     if self.players[i].gold > max_gold:
-                        best_player = i
+                        best_player = self.players[i].name
                         max_gold = self.players[i].gold
                 self.srv.send_message_to_all(json.dumps({
                     'action': 'winner',
