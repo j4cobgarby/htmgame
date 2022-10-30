@@ -78,7 +78,7 @@ function onLoad() {
 
     renderClassList()
 
-    // changeState("lobby")
+    changeState("lobby")
 }
 
 function changeState(to) {
