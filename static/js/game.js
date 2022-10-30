@@ -18,6 +18,7 @@ var sceneNames = [
     "voting",
     "loot-waiting",
     "loot-choose",
+    "waiting",
 ]
 
 var state = "lobby"
@@ -59,8 +60,11 @@ function onLoad() {
             answers = data.players
 
             showAllAnswers(0)
-
             break
+        case "looting_begin":
+            changeState("loot-waiting")
+            break
+            
         case "request_item_choice":
             changeState("loot_choose")
             lootOptions = data.options
@@ -93,20 +97,41 @@ function startVote() {
     container.innerHTML = ""
 
     for (var answer of answers) {
-        var el = document.createElement("div")
-        el.className = "vote-player"
+        if (answer.user_id != playerID) {
+            var el = document.createElement("div")
+            el.className = "vote-player"
 
-        var img = document.createElement("img")
-        img.src = "img/test.png"
-        el.appendChild(img)
+            var img = document.createElement("img")
+            img.src = "img/test.png"
+            el.appendChild(img)
 
-        var p = document.createElement("P")
-        p.innerHTML = answer.message
-        p.className = "answer"
-        el.appendChild(p)
+            var p = document.createElement("P")
+            p.innerHTML = answer.message
+            p.className = "answer"
+            el.appendChild(p)
+
+            const ID = answer.user_id
+            el.onclick = () => {
+                castVote(ID)
+                wait()
+            }
+
+            container.appendChild(el)
+        }
     }
 
     changeState("voting")
+}
+
+function wait() {
+    changeState("waiting")
+}
+
+function castVote(userID) {
+    ws.send(JSON.stringify({
+        "action": "send_vote",
+        "player": userID
+    }))
 }
 
 function showAllAnswers(n) {
@@ -230,6 +255,8 @@ function submitSolution() {
     }
 
     ws.send(JSON.stringify(data))
+
+    wait()
 }
 
 function showLootOptions() {
