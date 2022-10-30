@@ -18,6 +18,24 @@ var selectedClass = 0
 function changeClass(index) {
     selectedClass = index
     renderClassList()
+    updatePlayerInfo()
+}
+
+function updateName(name) {
+    playerName = name
+    updatePlayerInfo()
+}
+
+function updatePlayerInfo() {
+    ws.send(JSON.stringify({
+        "action":"configure", "options": {"name":playerName,"playerclass":selectedClass}
+    }))
+}
+
+function startGame() {
+    ws.send(JSON.stringify({
+        "action": "start_game"
+    }))
 }
 
 function renderClassList() {

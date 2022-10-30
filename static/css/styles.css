@@ -42,7 +42,7 @@ div.wrapper {
 
 
 div.wrapper[hidden] {
-    display: none;
+    display: none !important;
 }
 
 p {

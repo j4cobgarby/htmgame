@@ -1,25 +1,94 @@
-var scenario = 4
+var scenario = 0
 var feature = 0
 
+var playerName = ""
 var invMax = 4
 var gold = 7
 var selection = null
 
-var items = [
-    {
-        name: "Pet Cat",
-        description: "Do not the cat.",
-    },
-    {
-        name: "Russian Doll",
-        description: "\"Da.\"",
-    },
+var answers
+
+var sceneNames = [
+    "join",
+    "lobby",
+    "setting",
+    "choice",
+    "answer",
+    "voting",
+    "loot-waiting",
+    "loot-choose",
 ]
 
+var state = "lobby"
+
+var ws
+
+var inventory = [0, 5]
+
 function onLoad() {
-    renderInventory()
-    renderScenario()
+    ws = new WebSocket("ws://localhost:6483")
+    ws.addEventListener('message', (event) => {
+        console.log('msg: ', event.data)
+
+        var data = JSON.parse(event.data)
+
+        switch (data.action) {
+        case "room_description":
+            scenario = data.description_id
+            feature = data.feature_id
+            renderScenario()
+            renderInventory()
+            break
+        case "request_answers":
+            changeState("setting")
+
+            window.setTimeout(() => {
+                changeState("choice")
+            }, 5000)
+            break
+        case "all_answers":
+            changeState("answer")
+            answers = data.players
+
+            showAllAnswers(0)
+
+            break
+        }
+    })
+
     renderClassList()
+
+    changeState("lobby")
+}
+
+function changeState(to) {
+    state = to
+    showHidePages()
+}
+
+function showHidePages() {
+    for (var name of sceneNames) {
+        document.getElementById("scene-" + name).hidden = name != state
+    }
+}
+
+function showAllAnswers(n) {
+    if (n >= answers.length) {
+        changeState("voting")
+        return
+    }
+
+    var answer = answers[n]
+    const N = n + 1
+
+    console.log(answer)
+    document.getElementById("answer-class").innerHTML = answer.user
+    document.getElementById("answer-item").innerHTML = itemsData[answer.item].name
+    document.getElementById("answer-text").innerHTML = answer.message
+
+    window.setTimeout(() => {
+        showAllAnswers(N)
+    }, 5000)
 }
 
 function renderInventory() {
@@ -28,8 +97,8 @@ function renderInventory() {
 
     inv.appendChild(inventoryTotal())
 
-    for (var item of items) {
-        inv.appendChild(inventoryItem(item))
+    for (var item of inventory) {
+        inv.appendChild(inventoryItem(item, itemsData[item]))
     }
 }
 
@@ -49,15 +118,15 @@ function renderSelection() {
     var stagedItem = document.getElementById("staged")
     var button = document.getElementById("submit")
 
-    if (selection) {
+    if (selection != null) {
         stagedItem.classList.remove("disabled")
         button.classList.remove("disabled")
 
         var h2 = document.createElement("h2")
-        h2.innerHTML = selection.name
+        h2.innerHTML = itemsData[selection].name
 
         var p = document.createElement("p")
-        p.innerHTML = selection.description
+        p.innerHTML = itemsData[selection].description
 
         stagedItem.innerHTML = ""
         stagedItem.appendChild(h2)
@@ -70,12 +139,12 @@ function renderSelection() {
 
 function inventoryTotal() {
     var elem = document.createElement("p")
-    elem.innerHTML = items.length + "/" + invMax
+    elem.innerHTML = inventory.length + "/" + invMax
     elem.id = "inv-total"
     return elem
 }
 
-function inventoryItem(item) {
+function inventoryItem(index, item) {
     var elem = document.createElement("div")
     elem.className = "item"
 
@@ -89,24 +158,39 @@ function inventoryItem(item) {
     elem.appendChild(p)
 
     const it = item
-    elem.onclick = () => selectItem(it)
+    elem.onclick = () => selectItem(index)
 
     return elem
 }
 
-function selectItem(item) {
-    if (selection) {
-        items.push(selection)
+function selectItem(index) {
+    if (selection != null) {
+        inventory.push(selection)
     }
     
-    selection = item
+    selection = index
     
-    for (var i = 0; i < items.length; i++) {
-        if (items[i].name == item.name) {
-            items.splice(i, 1)
+    for (var i = 0; i < inventory.length; i++) {
+        if (inventory[i] == index) {
+            inventory.splice(i, 1)
         }
     }
 
     renderInventory()
     renderSelection()
+}
+
+function submitSolution() {
+    if (selection == null) {
+        alert("no selection")
+        return
+    }
+
+    var data = {
+        "action": "send_answer",
+        "message": document.getElementById("solution-input").value,
+        "item_id": selection,
+    }
+
+    ws.send(JSON.stringify(data))
 }

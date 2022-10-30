@@ -20,7 +20,7 @@
     <script src="js/lobby.js"></script>
 </head>
 <body onload="onLoad()">
-    <h1 id="page-title">Page Title</h1>
+    <h1 id="page-title"></h1>
 
     <div class="wrapper" id="scene-join">
         <div>
@@ -47,13 +47,15 @@
         <div id="lobby-description">
             <h1 id="lobby-heading">Dr. Professor, PhD</h1>
             <ul id="lobby-list">
-                <li>Receives <span class="item" id="start-item">Binder of Binding</span></li>
+                <li>Receives 1x <span class="item" id="start-item">Binder of Binding</span></li>
                 <li id="cat-feat">May reuse an item (2x)</li>
             </ul>
             <p id="lobby-class">
                 As a smart doctor professor with a doctorate, you possess unbounded intelligence. Your power lies in binding unrelated things together and deducing what will happen before you do it.
             </p>
         </div>
+        <input type="text" name="name-input" class="name-input" placeholder="Enter your name here" oninput="updateName(event.target.value)">
+        <button onclick="startGame()" class="start-game-button">Start Game</button>
     </div>
 
     <div class="wrapper" id="scene-setting">
@@ -96,7 +98,8 @@
                 <div class="item disabled" id="staged">
                     <p>Choose an item above</p>
                 </div>
-                <button class="submit disabled" id="submit">
+                <textarea name="solution" id="solution-input" placeholder="What will you do with this chosen item?"></textarea>
+                <button class="submit disabled" id="submit" onclick="submitSolution()">
                     Submit
                 </button>
             </div>
@@ -121,8 +124,8 @@
                 <p>There is a small firepit in the corner of this room.</p>
             </div>
             
-            <p>The <span class="class" id="answer-class">Astronomer</span> will:</p>
-            <p id="answer">
+            <p>The <span class="class" id="answer-class">Astronomer</span> will use <span class="item" id="answer-item"></span>:</p>
+            <p id="answer-text">
                 look to the stars and request divine assistance from the gods
             </p>
         </div>

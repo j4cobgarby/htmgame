@@ -209,7 +209,7 @@ class Game:
                     self.answers_submitted += 1
                     player.item_action = (msg['item_id'], msg['message']) # (item_id, action - the thing they do with it not the action send_message!)
                     if self.answers_submitted >= len(self.players):
-                        self.svr.send_message_to_all(json.dumps({
+                        self.srv.send_message_to_all(json.dumps({
                             'action': 'all_answers',
                             'players': [
                                 {
