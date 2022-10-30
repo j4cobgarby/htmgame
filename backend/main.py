@@ -89,6 +89,17 @@ class Game:
             self.srv.allow_new_connections()
         elif self.state == State.PRESENT_ROOM:
             if self.rooms_visited >= 4:
+                best_player = None
+                max_gold = 0
+                for i in self.players:
+                    if self.players[i].gold > max_gold:
+                        best_player = i
+                        max_gold = self.players[i].gold
+                self.srv.send_message_to_all(json.dumps({
+                    'action': 'winner',
+                    'player': best_player,
+                    'gold': max_gold
+                }))
                 self.srv.shutdown_gracefully()
                 print("Shutting down, enough rooms been to now mens")
                 return
@@ -133,6 +144,7 @@ class Game:
             print(f"self.players: {self.players}")
             for voter in self.players:
                 votes[self.players[voter].vote] += 1
+                self.players[self.players[voter].vote].gold += 1
             self.chooser_queue = sorted(votes.items(), key=lambda x : x[1], reverse=True)
 
             to_send = self.chooser_queue.pop(0)
