@@ -84,8 +84,8 @@ class Game:
             print("Changing to lobby.")
             self.srv.allow_new_connections()
         elif self.state == State.PRESENT_ROOM:
-            desc_id = random.randint(0, len(self.descriptions))
-            feat_id = random.randint(0, len(self.features))
+            desc_id = random.randint(0, len(self.descriptions)-1)
+            feat_id = random.randint(0, len(self.features)-1)
             self.srv.send_message_to_all(json.dumps({
                 'action': 'room_description',
                 'description_id': desc_id,
