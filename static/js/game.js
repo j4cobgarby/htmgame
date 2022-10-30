@@ -74,7 +74,7 @@ function onLoad() {
 
     renderClassList()
 
-    changeState("lobby")
+    changeState("join")
 }
 
 function changeState(to) {
