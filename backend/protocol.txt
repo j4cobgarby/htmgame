@@ -48,6 +48,23 @@ SUBMIT_ANSWERS state:
             'message': <the answer that the user typed>
             'item_id': <b number>
         }
+    server -> client:
+        {
+            'players':
+            [
+                {
+                    'user': username,
+                    'user_id': user_id,
+                    'item': item_id,
+                    'message': message
+                },
+                {
+                    'user': user_id,
+                    'item': item_id,
+                    'message': message
+                }
+            ]
+        }
 
 VOTING state:
 
