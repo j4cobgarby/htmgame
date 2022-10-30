@@ -1,5 +1,5 @@
 LOBBY state:
-
+    ### Connecting to server
     client -> server: connect
     server -> client: 
         on success:
@@ -13,6 +13,7 @@ LOBBY state:
             message: <failure reason>
         }
 
+    ### Configuring name and class
     client -> server:
         {
             action: 'configure',
@@ -27,8 +28,19 @@ LOBBY state:
             message: <confirmation message>
         }
 
-PRESENT_ROOM state:
+    ### Starting the game
 
+    client -> server:
+        {
+            action: 'start_game'
+        }
+    server -> client:
+        {
+            status: 1,
+            message: 'starting'
+        }
+
+PRESENT_ROOM state:
     server -> client:
         {
             'action': 'room_description',

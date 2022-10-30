@@ -15,6 +15,11 @@ def loaditems(path):
                 d.append((lines[i].strip(), lines[i+1].strip(), lines[i+2].strip()))
         return d
 
+def load_descriptions_features(path):
+    with open(path, "r") as f:
+        lines = [l.strip() for l in f.readlines() if len(l.strip()) > 0]
+        return lines
+
 class Character:
     def __init__(self):
         self.name = ""
@@ -37,6 +42,8 @@ class State(Enum):
 class Game:
     def __init__(self):
         self.items = loaditems("items.txt")
+        self.descriptions = load_descriptions_features("room_descriptions.txt")
+        self.features = load_descriptions_features("features.txt")
         self.players = {}
         self.state = State.LOBBY
 
@@ -69,13 +76,11 @@ class Game:
                 print("Changing to lobby.")
                 self.srv.allow_new_connections()
             case State.PRESENT_ROOM:
-                print("OOOh, you've just entered a scary room. Description here!")
                 self.srv.send_message_to_all(json.dumps({
                     'action': 'room_description',
-                    'description': 'Spooky scary room description',
-                    'feature': 'A unique and fun feature of the room'
+                    'description': random.choice(self.descriptions),
+                    'feature': random.choice(self.features)
                 }))
-                time.sleep(5)
                 print("Moving on")
                 self.change_state(State.SUBMIT_ANSWERS)
             case State.SUBMIT_ANSWERS:
@@ -94,16 +99,19 @@ class Game:
                 # Pick the starting selection of items
                 indexed = [(i, v) for i, v in enumerate(self.items)]
                 self.selections = random.sample(indexed, len(self.players)+1)
+                #self.selections is like [(3, ("name", "desc", "adj"))]
 
                 # Order the players by how many votes they got, highest first
-                votes = {(i[0], 0) for i in self.players}
+                votes = {i:0 for i in self.players}
+                print(f"votes: {votes}")
+                print(f"self.players: {self.players}")
                 for voter in self.players:
                     votes[self.players[voter].vote] += 1
                 self.chooser_queue = sorted(votes.items(), key=lambda x : x[1], reverse=True)
 
                 to_send = self.chooser_queue.pop(0)
                 for c in self.srv.clients:
-                    if c.id == to_send[0]:
+                    if c['id'] == to_send[0]:
                         self.srv.send_message(c, json.dumps({
                             'action': 'request_item_choice',
                             'options': [{
@@ -111,7 +119,7 @@ class Game:
                                 'name': choice[1][0],
                                 'description': choice[1][1],
                                 'adjectives': []
-                            } for choice in enumerate(selections)]
+                            } for choice in self.selections]
                         }))
 
                 # while len(self.chooser_queue) > 0:
@@ -138,6 +146,7 @@ class Game:
 
     def message_received(self, client, server, message):
         msg = json.loads(message)
+        print(f"==: {msg}")
         player = self.players[client['id']]
         pname = player.name
 
@@ -169,9 +178,8 @@ class Game:
                         self.answers_submitted += 1
                         player.item_action = (msg['item_id'], msg['message']) # (item_id, action - the thing they do with it not the action send_message!)
                         if self.answers_submitted >= len(self.players):
-                            time.sleep(1)
-                            change_state(State.VOTING)
-                except:
+                            self.change_state(State.VOTING)
+                except KeyError:
                     print("Invalid JSON when submitting answer")
             case State.VOTING:
                 try:
@@ -179,9 +187,8 @@ class Game:
                         self.votes_submitted += 1
                         player.vote = msg['player'] # This is the ID of the player
                         if self.votes_submitted >= len(self.players):
-                            time.sleep(1)
-                            change_state(State.CHOOSE_ITEMS)
-                except:
+                            self.change_state(State.CHOOSE_ITEMS)
+                except KeyError:
                     print("Invalid JSON when voting")
             case State.CHOOSE_ITEMS:
                 try:
@@ -191,7 +198,7 @@ class Game:
                         print(f"{pname} has chosen the item {msg['choice']}")
 
                         # If some plays are still in the choosing queue,
-                        if len(self.chooser_queue > 0):
+                        if len(self.chooser_queue) > 0:
                             to_send = self.chooser_queue.pop(0)
                             print(f"Now that {pname} has picked, letting {to_send} pick")
                             # Find the client that's at the front of the queue
@@ -204,13 +211,12 @@ class Game:
                                             'name': choice[1][0],
                                             'description': choice[1][1],
                                             'adjectives': []
-                                        } for choice in enumerate(selections)]
+                                        } for choice in self.selections]
                                     }))
                         else:
                             print("All players chosen items now :)")
-                            time.sleep(1)
-                            change_state(State.PRESENT_ROOM)
-                except:
+                            self.change_state(State.PRESENT_ROOM)
+                except KeyError:
                     print("Invalid JSON when choosing item")
             case State.EVENT_PRESENT:
                 pass
