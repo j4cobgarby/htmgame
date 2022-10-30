@@ -66,7 +66,6 @@ function onLoad() {
         case "request_item_choice":
             lootOptions = data.options
             showLootOptions(lootOptions)
-            changeState("loot_choose")
             break
         }
     })
@@ -259,9 +258,10 @@ function submitSolution() {
 }
 
 function showLootOptions(lootOptions) {
+    changeState("loot-choose")
+
     var container = document.getElementById("loot-choices")
     container.innerHTML = ""
-    document.getElementById("scene-loot-choose").hidden = false
 
     for (var option of lootOptions) {
         var el = document.createElement("div")
