@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/lobby.css">
+    <link rel="stylesheet" href="css/join.css">
+    <link rel="stylesheet" href="css/setting.css">
+    <link rel="stylesheet" href="css/choice.css">
+    <link rel="stylesheet" href="css/answer.css">
+    <link rel="stylesheet" href="css/voting.css">
+    <link rel="stylesheet" href="css/loot.css">
+    <script src="choice.js"></script>
+</head>
+<body onload="onLoad()">
+    <h1 id="page-title">Page Title</h1>
+
+    <div class="wrapper" id="scene-join">
+        <div>
+            <h1>The Game</h1>
+            <div class="form">
+                <input type="text" id="room-code" name="room-code" placeholder="Room Code">
+                <br>
+                <button class="submit">Join!</button>
+            </div>
+        </div>
+        <div>
+            <p>
+                Description of the game. Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus fugiat voluptate quam quas aspernatur id expedita adipisci.
+            </p>
+            <p>
+                Fuga, illum veritatis esse dolores veniam autem animi rerum consequatur! Officia, enim.
+            </p>
+        </div>
+    </div>
+
+    <div class="wrapper" id="scene-lobby">
+        <div id="classes">
+            <div class="class selected">
+                <h1>Dr. Professor, PhD</h1>
+            </div>
+            <div class="class">
+                <h1>Sage Mage</h1>
+            </div>
+            <div class="class">
+                <h1>The Quantum Mechanic</h1>
+            </div>
+
+            <div class="class">
+                <h1>Swashbuckler</h1>
+            </div>
+            <div class="class">
+                <h1>Barber-ian</h1>
+            </div>
+            <div class="class">
+                <h1>Strongman</h1>
+            </div>
+
+            <div class="class">
+                <h1>Magician</h1>
+            </div>
+            <div class="class">
+                <h1>Rouge</h1>
+            </div>
+            <div class="class">
+                <h1>Cookie-jar Pilferer</h1>
+            </div>
+
+            <div class="class">
+                <h1>Astronomer</h1>
+            </div>
+            <div class="class">
+                <h1>Cult Leader</h1>
+            </div>
+            <div class="class">
+                <h1>Bar Nun</h1>
+            </div>
+        </div>
+        <div id="description">
+            <h1>Dr. Professor, PhD</h1>
+            <ul>
+                <li>Receives <span class="item">Binder of Binding</span></li>
+                <li>May reuse an item (2x)</li>
+            </ul>
+            <p>
+                As a smart doctor professor with a doctorate, you possess unbounded intelligence. Your power lies in binding unrelated things together and deducing what will happen before you do it.
+            </p>
+        </div>
+    </div>
+
+    <div class="wrapper" id="scene-setting">
+        <div class="top">
+            <img src="img/guards.png" alt="">
+            <div>
+                <h1>A new challenge!</h1>
+                <p id="setting-description">Tragedy besets your party as a cave-in strands you in the darkest depths of the dungeon for days. As your rations dwindle, it becomes clear to each of you that you must supplement them for the sake of morale. How do you gather more food?</p>
+
+                <div class="feature">
+                    <img src="img/firepit.png" alt="">
+                    <p>There is a small firepit in the corner of this room.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" id="scene-choice">
+        <div class="left">
+            <h1>The Swashbuckler</h1>
+            <div class="inventory" id="inventory">
+                <p id="inv-total">2/4</p>
+                <div class="item">
+                    <div class="coins">
+                        <img src="img/gold.png" alt="">
+                        <h2>7 gold</h2>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <h2>Pet Cat</h2>
+                    <p>Do not the cat.</p>
+                </div>
+                <div class="item">
+                    <h2>Russian Doll</h2>
+                    <p>"Da."</p>
+                </div>
+            </div>
+            <div class="staging" id="staging">
+                <div class="item disabled" id="staged">
+                    <p>Choose an item above</p>
+                </div>
+                <button class="submit disabled" id="submit">
+                    Submit
+                </button>
+            </div>
+        </div>
+        <div class="right">
+            <img src="img/guards.png" alt="">
+            <p id="choice-description">Tragedy besets your party as a cave-in strands you in the darkest depths of the dungeon for days. As your rations dwindle, it becomes clear to each of you that you must supplement them for the sake of morale. How do you gather more food?</p>
+            <div class="feature">
+                <img src="img/firepit.png" alt="">
+                <p>There is a small firepit in the corner of this room.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" id="scene-answer">
+        <img src="img/guards.png" alt="">
+        <div class="descriptions">
+            <p id="answer-description">Tragedy besets your party as a cave-in strands you in the darkest depths of the dungeon for days. As your rations dwindle, it becomes clear to each of you that you must supplement them for the sake of morale. How do you gather more food?</p>
+
+            <div class="feature">
+                <img src="img/firepit.png" alt="">
+                <p>There is a small firepit in the corner of this room.</p>
+            </div>
+            
+            <p>The <span class="class" id="answer-class">Astronomer</span> will:</p>
+            <p id="answer">
+                look to the stars and request divine assistance from the gods
+            </p>
+        </div>
+    </div>
+
+    <div class="wrapper" id="scene-voting">
+        <div class="vote-players">
+            <div class="vote-player">
+                <img src="img/firepit.png" alt="">
+                <p class="answer">
+                    look to the stars and request divine assistance from the gods
+                </p>
+            </div>
+            <div class="vote-player">
+                <img src="img/gold.png" alt="">
+                <p class="answer">
+                    goblin their nuts lol
+                </p>
+            </div>
+            <div class="vote-player">
+                <img src="img/guards.png" alt="">
+                <p class="answer">
+                    look to the stars and request divine assistance from the gods
+                </p>
+            </div>
+            <div class="vote-player">
+                <img src="img/test.png" alt="">
+                <p class="answer">
+                    goblin their nuts lol
+                </p>
+            </div>
+            <div class="vote-player">
+                <img src="img/guards.png" alt="">
+                <p class="answer">
+                    look to the stars and request divine assistance from the gods
+                </p>
+            </div>
+            <div class="vote-player">
+                <img src="img/test.png" alt="">
+                <p class="answer">
+                    goblin their nuts lol
+                </p>
+            </div>
+        </div>
+
+        <button class="submit">Vote!</button>
+    </div>
+
+    <div class="wrapper" id="scene-loot-waiting">
+        <h1>Your Party Found Some Loot!</h1>
+        <p>Now patiently wait your turn... or else!</p>
+    </div>
+
+    <div class="wrapper" id="scene-loot-choose">
+        <h1>Your Party Found Some Loot!</h1>
+        <p>Take your pick...</p>
+
+        <div id="loot-choices">
+            <div class="item">
+                <h2>Pet Cat</h2>
+                <p>Do not the cat.</p>
+            </div>
+            <div class="item">
+                <h2>Russian Doll</h2>
+                <p>"Da."</p>
+            </div>
+            <div class="item">
+                <h2>Tankard of Holy Water</h2>
+                <p>Fill a tankard with beer and boil the hell out of it. Careful with it though, it could be whiskey.</p>
+            </div>
+            <div class="item">
+                <h2>Russian Doll</h2>
+                <p>"Da."</p>
+            </div>
+            <div class="item">
+                <h2>Pet Cat</h2>
+                <p>Do not the cat.</p>
+            </div>
+            <div class="item">
+                <h2>Russian Doll</h2>
+                <p>"Da."</p>
+            </div>
+            <div class="item">
+                <h2>Pet Cat</h2>
+                <p>Do not the cat.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

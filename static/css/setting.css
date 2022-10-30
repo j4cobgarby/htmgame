@@ -1,0 +1,22 @@
+#scene-setting div.feature {
+    display: grid;
+    grid-template-columns: 128px auto;
+    gap: 10px;
+}
+
+#scene-setting div.top {
+    display: grid;
+    grid-template-columns: 512px auto;
+    gap: 20px;
+}
+
+#scene-setting div.top > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#scene-setting div.feature img {
+    width: 128px;
+    height: 128px;
+}
