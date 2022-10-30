@@ -60,6 +60,7 @@ SUBMIT_ANSWERS state:
                 },
                 {
                     'user': user_id,
+                    'user_id': user_id,
                     'item': item_id,
                     'message': message
                 }
