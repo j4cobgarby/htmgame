@@ -260,6 +260,7 @@ function submitSolution() {
 function showLootOptions() {
     var container = document.getElementById("loot-choices")
     container.innerHTML = ""
+    alert("AAAAAAAAAAAA")
 
     for (var option of lootOptions) {
         var el = document.createElement("div")
