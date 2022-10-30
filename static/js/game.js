@@ -64,6 +64,7 @@ function onLoad() {
             changeState("loot-waiting")
             break
         case "request_item_choice":
+            showLootOptions()
             changeState("loot_choose")
             lootOptions = data.options
             break
