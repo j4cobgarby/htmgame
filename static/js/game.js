@@ -100,11 +100,11 @@ function startVote() {
             el.className = "vote-player"
 
             var img = document.createElement("img")
-            img.src = "img/test.png"
+            img.src = "img/sprites/" + classData[selectedClass].sprite
             el.appendChild(img)
 
             var p = document.createElement("P")
-            p.innerHTML = answer.message
+            p.innerHTML = "Using " + itemsData[answer.item].name + ", " + answer.message
             p.className = "answer"
             el.appendChild(p)
 
