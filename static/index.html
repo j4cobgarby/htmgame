@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="css/answer.css">
     <link rel="stylesheet" href="css/voting.css">
     <link rel="stylesheet" href="css/loot.css">
-    <script src="choice.js"></script>
+    <script src="js/choice.js"></script>
+    <script src="js/lobby.js"></script>
 </head>
 <body onload="onLoad()">
     <h1 id="page-title">Page Title</h1>
@@ -40,7 +41,7 @@
 
     <div class="wrapper" id="scene-lobby">
         <div id="classes">
-            <div class="class selected">
+            <div class="class selected" onclick="change_class(event)">
                 <h1>Dr. Professor, PhD</h1>
             </div>
             <div class="class">
@@ -49,7 +50,6 @@
             <div class="class">
                 <h1>The Quantum Mechanic</h1>
             </div>
-
             <div class="class">
                 <h1>Swashbuckler</h1>
             </div>
@@ -59,7 +59,6 @@
             <div class="class">
                 <h1>Strongman</h1>
             </div>
-
             <div class="class">
                 <h1>Magician</h1>
             </div>
@@ -69,7 +68,6 @@
             <div class="class">
                 <h1>Cookie-jar Pilferer</h1>
             </div>
-
             <div class="class">
                 <h1>Astronomer</h1>
             </div>
@@ -80,13 +78,13 @@
                 <h1>Bar Nun</h1>
             </div>
         </div>
-        <div id="description">
-            <h1>Dr. Professor, PhD</h1>
-            <ul>
+        <div id="lobby-description">
+            <h1 id="lobby-heading">Dr. Professor, PhD</h1>
+            <ul id="lobby-list">
                 <li>Receives <span class="item">Binder of Binding</span></li>
                 <li>May reuse an item (2x)</li>
             </ul>
-            <p>
+            <p id="lobby-class">
                 As a smart doctor professor with a doctorate, you possess unbounded intelligence. Your power lies in binding unrelated things together and deducing what will happen before you do it.
             </p>
         </div>
