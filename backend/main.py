@@ -48,8 +48,9 @@ class Game:
         self.srv.run_forever()
 
     def new_client(self, client, server):
+        print("Hello to new client :D")
         if self.state == State.LOBBY:
-            self.players[client.id] = Character("", "")
+            self.players[client['id']] = Character()
             server.send_message(client, json.dumps({
                 "status": 1,
                 "message": f"join_success"
@@ -84,7 +85,42 @@ class Game:
                     'action': 'request_votes'
                 }))
             case State.CHOOSE_ITEMS:
-                pass
+                # Pick the starting selection of items
+                indexed = [(i, v) for i, v in enumerate(self.items)]
+                self.selections = random.sample(indexed, len(self.players)+1)
+
+                # Order the players by how many votes they got, highest first
+                votes = {(i[0], 0) for i in self.players}
+                for voter in self.players:
+                    votes[self.players[voter].vote] += 1
+                self.chooser_queue = sorted(votes.items(), key=lambda x : x[1], reverse=True)
+
+                to_send = self.chooser_queue.pop(0)
+                for c in self.srv.clients:
+                    if c.id == to_send[0]:
+                        self.srv.send_message(c, json.dumps({
+                            'action': 'request_item_choice',
+                            'options': [{
+                                'id': choice[0],
+                                'name': choice[1][0],
+                                'description': choice[1][1],
+                                'adjectives': []
+                            } for choice in enumerate(selections)]
+                        }))
+
+                # while len(self.chooser_queue) > 0:
+
+                #     for c in self.srv.clients:
+                #         if self.voter_queue[] == c.id:
+                #             self.srv.send_message(c, json.dumps({
+                #                 'action': 'request_item_choice',
+                #                 'options': [{
+                #                     'id': choice[0],
+                #                     'name': choice[1][0],
+                #                     'description': choice[1][1],
+                #                     'adjectives': []
+                #                 } for choice in enumerate(selections)]
+                #            }))
             case State.EVENT_PRESENT:
                 pass
             case State.EVENT_PICK_ITEMS:
@@ -96,7 +132,7 @@ class Game:
 
     def message_received(self, client, server, message):
         msg = json.loads(message)
-        player = self.players[client.id]
+        player = self.players[client['id']]
         pname = player.name
 
         match self.state:
@@ -113,14 +149,15 @@ class Game:
                         print(f"Starting game!")
                         response['status'] = 1
                         response['message'] = 'starting'
-                        self.srv.disallow_new_connections()
-                except:
+                        self.srv.deny_new_connections()
+                        self.change_state(State.PRESENT_ROOM)
+                except KeyError:
                     response['message'] = 'incorrect_request'
                     response['status'] = 0
+                self.srv.send_message(client, json.dumps(response))
             case State.PRESENT_ROOM:
                 pass
             case State.SUBMIT_ANSWERS:
-                response = {'status': 0, 'message':''}
                 try:
                     if msg['action'] == 'send_answer':
                        player.item_action = (msg['item_id'], msg['message']) # (item_id, action(the thing they do with it not the action send_message!))
@@ -133,7 +170,30 @@ class Game:
                 except:
                     print("Invalid JSON when voting")
             case State.CHOOSE_ITEMS:
-                pass
+                try:
+                    if msg['action'] == 'choose_item':
+                        # Remove the selection that the player chose
+                        self.selections.remove((msg['choice'], self.items[msg['choice']]))
+                        print(f"{pname} has chosen the item {msg['choice']}")
+
+                        # If some plays are still in the choosing queue,
+                        if len(self.chooser_queue > 0):
+                            to_send = self.chooser_queue.pop(0)
+                            print(f"Now that {pname} has picked, letting {to_send} pick")
+                            # Find the client that's at the front of the queue
+                            for c in self.srv.clients:
+                                if c.id == to_send[0]:
+                                    self.srv.send_message(c, json.dumps({
+                                        'action': 'request_item_choice',
+                                        'options': [{
+                                            'id': choice[0],
+                                            'name': choice[1][0],
+                                            'description': choice[1][1],
+                                            'adjectives': []
+                                        } for choice in enumerate(selections)]
+                                    }))
+                except:
+                    print("Invalid JSON when choosing item")
             case State.EVENT_PRESENT:
                 pass
             case State.EVENT_PICK_ITEMS:
