@@ -1,0 +1,42 @@
+div.wrapper#scene-lobby {
+    display: grid;
+    grid-template-columns: 300px auto;
+    gap: 15px;
+}
+
+#scene-lobby div#classes {
+    background-color: rgb(39, 35, 32);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#scene-lobby div.class {
+    background-color: rgb(17, 17, 16);
+    border: 1px solid rgb(56, 53, 50);
+    padding: 10px;
+    cursor: pointer;
+}
+
+#scene-lobby div.class:hover {
+    background-color: rgb(36, 36, 32);
+}
+
+#scene-lobby div.class:active {
+    background-color: rgb(56, 56, 47);
+}
+
+#scene-lobby div.class.disabled {
+    background-color: rgb(83, 76, 66);
+    cursor: default;
+}
+
+#scene-lobby div.class.selected {
+    background-color: rgb(73, 73, 58);
+}
+
+#scene-lobby div.class h1 {
+    font-size: 18pt;
+    text-align: left;
+}

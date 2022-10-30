@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 
-from websocket_server import WebsocketServer
-import random
+import random, json, time, printer
 from enum import Enum
-import json
-import time
+from websocket_server import WebsocketServer
 
 def loaditems(path):
     with open(path, "r") as f:
