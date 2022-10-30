@@ -32,3 +32,23 @@
     padding: 5px;
     color: rgb(56, 53, 50);
 }
+
+@media only screen and (max-device-width: 480px) {
+    #scene-answer div.feature {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    #scene-answer {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    #scene-answer div.feature img {
+        width: auto;
+        height: unset;
+    }
+    #scene-answer p#answer {
+        height: auto;
+    }
+}

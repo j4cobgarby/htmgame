@@ -127,3 +127,23 @@ div.wrapper#scene-choice {
     width: 128px;
     height: 128px;
 }
+
+@media only screen and (max-device-width: 480px) {
+    div.wrapper#scene-choice {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    #scene-choice div.right img {
+        width: auto;
+        height: unset;
+    }
+    #scene-choice div.feature {
+        display: flex;
+        flex-direction: column;
+    }
+    #scene-choice div.feature img {
+        width: auto;
+        height: unset;
+    }
+}
