@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import random, json, time, printer
+import random, json, time, printer, requests
 from enum import Enum
 from websocket_server import WebsocketServer
 
@@ -59,6 +59,9 @@ class Game:
         self.srv.set_fn_new_client(self.new_client)
         self.srv.set_fn_message_received(self.message_received)
         self.srv.set_fn_client_left(self.client_left)
+
+        json_response = requests.post("http://oliver:5000/broker/makecode").json()
+        print(f"Broker gave us code {json_response['code']}")
 
         self.srv.allow_new_connections()
         self.srv.run_forever()
@@ -169,7 +172,7 @@ class Game:
                 'status': 1,
                 'player_id': client['id'],
                 'items': [
-                    self.items[i[0]][0] for i in player.inv
+                    i[0] for i in player.inv
                 ]
             }
             self.srv.send_message(client, json.dumps(response))
