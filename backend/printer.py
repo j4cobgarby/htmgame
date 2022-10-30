@@ -1,7 +1,7 @@
 import serial, math
 
 class Printer:
-    def __init__(self, port: int, baudrate: int = 38400):
+    def __init__(self, port: int, baudrate: int = 38400) -> None:
         self.font1 = 42 # Number of chars
         self.font2 = 56
         self.xscale = 1
@@ -74,5 +74,4 @@ class Printer:
 
 if __name__ == '__main__':
     p = Printer('COM1')
-    p.cut()
     p.close()
