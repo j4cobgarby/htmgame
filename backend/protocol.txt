@@ -5,12 +5,12 @@ LOBBY state:
         on success:
         {
             status: 1,
-            message: <confirmation message>
+            action: 'join_success'
         }
         on failure:
         {
             status: 0,
-            message: <failure reason>
+            message: 'join_failure'
         }
 
     ### Configuring name and class
@@ -24,8 +24,8 @@ LOBBY state:
         }
     server -> client:
         {
-            status: 1,
-            message: <confirmation message>
+            status: 1 OR 0,
+            action: 'configured' OR 'invalid_class'
         }
 
     ### Starting the game
@@ -37,7 +37,7 @@ LOBBY state:
     server -> client:
         {
             status: 1,
-            message: 'starting'
+            action: 'starting_game'
         }
 
 PRESENT_ROOM state:
@@ -72,12 +72,7 @@ SUBMIT_ANSWERS state:
                     'item': item_id,
                     'message': message
                 },
-                {
-                    'user': user_id,
-                    'user_id': user_id,
-                    'item': item_id,
-                    'message': message
-                }
+            
             ]
         }
 
