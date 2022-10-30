@@ -14,7 +14,8 @@ var items = [
 ]
 
 function onLoad() {
-    renderInventory()
+    // renderInventory()
+    renderClassList()
 }
 
 function renderInventory() {

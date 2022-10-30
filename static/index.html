@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="css/answer.css">
     <link rel="stylesheet" href="css/voting.css">
     <link rel="stylesheet" href="css/loot.css">
+
+    <script src="js/data.js"></script>
     <script src="js/choice.js"></script>
     <script src="js/lobby.js"></script>
 </head>
@@ -41,48 +43,12 @@
 
     <div class="wrapper" id="scene-lobby">
         <div id="classes">
-            <div class="class selected" onclick="change_class(event)">
-                <h1>Dr. Professor, PhD</h1>
-            </div>
-            <div class="class">
-                <h1>Sage Mage</h1>
-            </div>
-            <div class="class">
-                <h1>The Quantum Mechanic</h1>
-            </div>
-            <div class="class">
-                <h1>Swashbuckler</h1>
-            </div>
-            <div class="class">
-                <h1>Barber-ian</h1>
-            </div>
-            <div class="class">
-                <h1>Strongman</h1>
-            </div>
-            <div class="class">
-                <h1>Magician</h1>
-            </div>
-            <div class="class">
-                <h1>Rouge</h1>
-            </div>
-            <div class="class">
-                <h1>Cookie-jar Pilferer</h1>
-            </div>
-            <div class="class">
-                <h1>Astronomer</h1>
-            </div>
-            <div class="class">
-                <h1>Cult Leader</h1>
-            </div>
-            <div class="class">
-                <h1>Bar Nun</h1>
-            </div>
         </div>
         <div id="lobby-description">
             <h1 id="lobby-heading">Dr. Professor, PhD</h1>
             <ul id="lobby-list">
-                <li>Receives <span class="item">Binder of Binding</span></li>
-                <li>May reuse an item (2x)</li>
+                <li>Receives <span class="item" id="start-item">Binder of Binding</span></li>
+                <li id="cat-feat">May reuse an item (2x)</li>
             </ul>
             <p id="lobby-class">
                 As a smart doctor professor with a doctorate, you possess unbounded intelligence. Your power lies in binding unrelated things together and deducing what will happen before you do it.
@@ -92,13 +58,13 @@
 
     <div class="wrapper" id="scene-setting">
         <div class="top">
-            <img src="img/guards.png" alt="">
+            <img src="img/scenes/guards.png" alt="">
             <div>
                 <h1>A new challenge!</h1>
                 <p id="setting-description">Tragedy besets your party as a cave-in strands you in the darkest depths of the dungeon for days. As your rations dwindle, it becomes clear to each of you that you must supplement them for the sake of morale. How do you gather more food?</p>
 
                 <div class="feature">
-                    <img src="img/firepit.png" alt="">
+                    <img src="img/features/firepit.png" alt="">
                     <p>There is a small firepit in the corner of this room.</p>
                 </div>
             </div>
@@ -136,17 +102,17 @@
             </div>
         </div>
         <div class="right">
-            <img src="img/guards.png" alt="">
+            <img src="img/scenes/guards.png" alt="">
             <p id="choice-description">Tragedy besets your party as a cave-in strands you in the darkest depths of the dungeon for days. As your rations dwindle, it becomes clear to each of you that you must supplement them for the sake of morale. How do you gather more food?</p>
             <div class="feature">
-                <img src="img/firepit.png" alt="">
+                <img src="img/features/firepit.png" alt="">
                 <p>There is a small firepit in the corner of this room.</p>
             </div>
         </div>
     </div>
 
     <div class="wrapper" id="scene-answer">
-        <img src="img/guards.png" alt="">
+        <img src="img/scenes/guards.png" alt="">
         <div class="descriptions">
             <p id="answer-description">Tragedy besets your party as a cave-in strands you in the darkest depths of the dungeon for days. As your rations dwindle, it becomes clear to each of you that you must supplement them for the sake of morale. How do you gather more food?</p>
 
