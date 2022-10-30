@@ -54,6 +54,7 @@ class Game:
         self.classes = loadclasses("class.txt")
         self.players = {}
         self.state = State.LOBBY
+        self.rooms_visited = 0
 
         self.srv = WebsocketServer(host="127.0.0.1", port=6483) # Change this to actual hostname for Pi
         self.srv.set_fn_new_client(self.new_client)
@@ -87,6 +88,12 @@ class Game:
             print("Changing to lobby.")
             self.srv.allow_new_connections()
         elif self.state == State.PRESENT_ROOM:
+            if rooms_visited >= 4:
+                self.srv.shutdown_gracefully()
+                print("Shutting down, enough rooms been to now mens")
+                return
+            rooms_visited += 1
+
             desc_id = random.randint(0, len(self.descriptions)-1)
             feat_id = random.randint(0, len(self.features)-1)
             self.srv.send_message_to_all(json.dumps({
@@ -111,6 +118,10 @@ class Game:
                 'action': 'request_votes'
             }))
         elif self.state == State.CHOOSE_ITEMS:
+            self.srv.send_message_to_all(json.dumps({
+                'action': 'looting_begin'
+            }))
+
             # Pick the starting selection of items
             indexed = [(i, v) for i, v in enumerate(self.items)]
             self.selections = random.sample(indexed, len(self.players)+1)

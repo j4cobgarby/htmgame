@@ -90,6 +90,10 @@ VOTING state:
         }
 
 CHOOSE_ITEMS state:
+    server -> client:
+        {
+            'action': 'looting_begin'
+        }
 
     server -> client:
         {
