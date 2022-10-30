@@ -230,10 +230,13 @@ class Game:
             try:
                 if msg['action'] == 'send_answer':
                     self.answers_submitted += 1
+                    has_removed = False
                     for i in player.inv:
                         if i[0] == msg['item_id']:
                             player.inv.remove(i)
+                            has_removed = True
                             break
+                    print(f"Has removed an item for {player}? {has_removed}")
                     #player.inv.remove((msg['item_id'], ))
                     player.item_action = (msg['item_id'], msg['message']) # (item_id, action - the thing they do with it not the action send_message!)
                     if self.answers_submitted >= len(self.players):
