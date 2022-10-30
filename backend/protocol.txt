@@ -117,6 +117,13 @@ CHOOSE_ITEMS state:
     note: the server will ask each client in turn and wait for their response before asking the next. done in 
         order of who has most votes. if there are ties, randomise.
 
+    server -> client:
+        {
+            'action': 'winner',
+            'player': <id>
+            'gold': <gold>
+        }
+
 Broker:
     POST request ./broker/makecode:
         returns 
