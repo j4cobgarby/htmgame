@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import random, json, time, printer, requests
+import random, json, time, printer, requests, socket
 from enum import Enum
 from websocket_server import WebsocketServer
 
@@ -142,10 +142,7 @@ class Game:
             #     for c in self.srv.clients:
             #         if self.voter_queue[] == c.id:
             #             self.srv.send_message(c, json.dumps({
-            #                 'action': 'request_item_choice',
-            #                 'options': [{
-            #                     'id': choice[0],
-            #                     'name': choice[1][0],
+            #                 'action'self.items[i[0]][0]e': choice[1][0],
             #                     'description': choice[1][1],
             #                     'adjectives': []
             #                 } for choice in enumerate(selections)]
@@ -187,7 +184,7 @@ class Game:
                     player.name = msg['options']['name']
                     if 0 <= msg['options']['playerclass'] < len(self.classes):
                         player.playerclass = self.classes[msg['options']['playerclass']]
-                        player.inv.append((msg['options']['playerclass'], [])) # class gets item of ID equal to its class id
+                        player.inv = [(msg['options']['playerclass'], [])] # class gets item of ID equal to its class id
                         response['status'] = 1
                         response['action'] = 'configured'
                     else:
