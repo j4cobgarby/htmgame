@@ -66,9 +66,13 @@ class Printer:
         else:
             self.conn.write(f"\x1b\x33{chr(space)}".encode())
 
+    def cut(self) -> None:
+        self.conn.write(b"\x1d\x560")
+
     def close(self) -> None:
         self.conn.close()
 
 if __name__ == '__main__':
     p = Printer('COM1')
+    p.cut()
     p.close()
