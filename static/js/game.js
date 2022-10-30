@@ -28,7 +28,7 @@ var ws
 var inventory = []
 
 function onLoad() {
-    ws = new WebSocket("ws://localhost:6483")
+    ws = new WebSocket("ws://oliver:6483")
 
     ws.addEventListener('message', (event) => {
         console.log('msg: ', event.data)
@@ -64,8 +64,8 @@ function onLoad() {
             changeState("loot-waiting")
             break
         case "request_item_choice":
-            changeState("loot_choose")
             lootOptions = data.options
+            showLootOptions(lootOptions)
             break
         }
     })
@@ -266,13 +266,16 @@ function submitSolution() {
     wait()
 }
 
-function showLootOptions() {
+function showLootOptions(lootOptions) {
+    changeState("loot-choose")
+
     var container = document.getElementById("loot-choices")
     container.innerHTML = ""
 
     for (var option of lootOptions) {
         var el = document.createElement("div")
         el.className = "item"
+        container.append(el)
 
         var h2 = document.createElement("h2")
         h2.innerHTML = option.name
@@ -281,5 +284,15 @@ function showLootOptions() {
         var p = document.createElement("p")
         p.innerHTML = option.description
         el.appendChild(p)
+
+        const itemId = option.id
+        el.onclick = () => {
+            ws.send(JSON.stringify({
+                "action": "choose_item",
+                "choice": itemId,
+            }))
+
+            wait()
+        }
     }
 }

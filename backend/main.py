@@ -256,7 +256,7 @@ class Game:
                         print(f"Now that {pname} has picked, letting {to_send} pick")
                         # Find the client that's at the front of the queue
                         for c in self.srv.clients:
-                            if c.id == to_send[0]:
+                            if c['id'] == to_send[0]:
                                 self.srv.send_message(c, json.dumps({
                                     'action': 'request_item_choice',
                                     'options': [{
