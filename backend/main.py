@@ -88,11 +88,11 @@ class Game:
             print("Changing to lobby.")
             self.srv.allow_new_connections()
         elif self.state == State.PRESENT_ROOM:
-            if rooms_visited >= 4:
+            if self.rooms_visited >= 4:
                 self.srv.shutdown_gracefully()
                 print("Shutting down, enough rooms been to now mens")
                 return
-            rooms_visited += 1
+            self.rooms_visited += 1
 
             desc_id = random.randint(0, len(self.descriptions)-1)
             feat_id = random.randint(0, len(self.features)-1)
