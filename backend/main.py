@@ -264,7 +264,7 @@ class Game:
             try:
                 if msg['action'] == 'choose_item':
                     # Remove the selection that the player chose
-                    self.player.inv.append((msg['choice'], []))
+                    player.inv.append((msg['choice'], []))
                     self.selections.remove((msg['choice'], self.items[msg['choice']]))
                     print(f"{pname} has chosen the item {msg['choice']}")
 
