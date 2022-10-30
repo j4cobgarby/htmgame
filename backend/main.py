@@ -69,12 +69,12 @@ class Game:
             self.players[client['id']] = Character()
             server.send_message(client, json.dumps({
                 "status": 1,
-                "message": f"join_success"
+                "action": f"join_success"
             }))
         else:
             server.send_message(client, json.dumps({
                 "status": 0,
-                "message": "join_failure"
+                "action": "join_failure"
             }))
 
     def change_state(self, state):
@@ -165,6 +165,7 @@ class Game:
         if msg['action'] == 'get_status':
             print(f"{pname} getting status.")
             response = {
+                'action': 'status_response',
                 'status': 1,
                 'player_id': client['id'],
                 'items': [
@@ -185,19 +186,19 @@ class Game:
                             player.playerclass = self.classes[msg['options']['playerclass']]
                             player.inv.append((msg['options']['playerclass'], [])) # class gets item of ID equal to its class id
                             response['status'] = 1
-                            response['message'] = 'configured'
+                            response['action'] = 'configured'
                         else:
                             response['status'] = 0
-                            response['message'] = 'invalid class id'
+                            response['action'] = 'invalid_class'
 
                     elif msg['action'] == 'start_game':
                         print(f"Starting game!")
                         response['status'] = 1
-                        response['message'] = 'starting'
+                        response['action'] = 'starting_game'
                         self.srv.deny_new_connections()
                         self.change_state(State.PRESENT_ROOM)
                 except KeyError:
-                    response['message'] = 'incorrect_request'
+                    response['action'] = 'incorrect_request'
                     response['status'] = 0
                 self.srv.send_message(client, json.dumps(response))
             case State.PRESENT_ROOM:
