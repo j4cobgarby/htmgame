@@ -6,6 +6,14 @@ div.wrapper#scene-join {
     padding-bottom: 80px;
 }
 
+@media only screen and (max-device-width: 480px) {
+    div.wrapper#scene-join {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
 #scene-join div.form {
     width: 100%;
     margin-top: 30px;
