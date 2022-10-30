@@ -2,6 +2,7 @@ var scenario = 0
 var feature = 0
 
 var playerName = ""
+var playerID = -1
 var invMax = 4
 var gold = 7
 var selection = null
@@ -23,10 +24,11 @@ var state = "lobby"
 
 var ws
 
-var inventory = [0, 5]
+var inventory = []
 
 function onLoad() {
     ws = new WebSocket("ws://localhost:6483")
+
     ws.addEventListener('message', (event) => {
         console.log('msg: ', event.data)
 
@@ -40,11 +42,17 @@ function onLoad() {
             renderInventory()
             break
         case "request_answers":
+            getStatus()
             changeState("setting")
 
             window.setTimeout(() => {
                 changeState("choice")
             }, 5000)
+            break
+        case "status_response":
+            playerID = data.player_id
+            inventory = data.items
+            renderInventory()
             break
         case "all_answers":
             changeState("answer")
@@ -66,15 +74,40 @@ function changeState(to) {
     showHidePages()
 }
 
+function getStatus() {
+    ws.send(JSON.stringify({"action":"get_status"}))
+}
+
 function showHidePages() {
     for (var name of sceneNames) {
         document.getElementById("scene-" + name).hidden = name != state
     }
 }
 
+function startVote() {
+    var container = document.getElementById("vote-players")
+    container.innerHTML = ""
+
+    for (var answer of answers) {
+        var el = document.createElement("div")
+        el.className = "vote-player"
+
+        var img = document.createElement("img")
+        img.src = "img/test.png"
+        el.appendChild(img)
+
+        var p = document.createElement("P")
+        p.innerHTML = answer.message
+        p.className = "answer"
+        el.appendChild(p)
+    }
+
+    changeState("voting")
+}
+
 function showAllAnswers(n) {
     if (n >= answers.length) {
-        changeState("voting")
+        startVote()
         return
     }
 
