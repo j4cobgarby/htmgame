@@ -51,6 +51,18 @@ div.wrapper#scene-lobby {
 
 #scene-lobby input.name-input {
     font-size: 18pt;
+    padding-left: 15px;
+}
+
+#scene-lobby img.big-sprite {
+    width: 220px;
+    height: 220px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    left: 0;
+    right: 0;
 }
 
 #scene-lobby button.start-game-button {
