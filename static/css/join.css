@@ -36,6 +36,7 @@ div.wrapper#scene-join {
     font-size: 35pt;
     text-align: center;
     font-family: dos;
+    text-transform: uppercase;
 }
 
 #scene-join button.submit {
