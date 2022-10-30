@@ -275,5 +275,15 @@ function showLootOptions(lootOptions) {
         var p = document.createElement("p")
         p.innerHTML = option.description
         el.appendChild(p)
+
+        const itemId = option.id
+        el.onclick = () => {
+            ws.send(JSON.stringify({
+                "action": "choose_item",
+                "choice": itemId,
+            }))
+
+            wait()
+        }
     }
 }
