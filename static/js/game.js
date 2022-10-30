@@ -70,7 +70,7 @@ function onLoad() {
             break
         case "winner":
             changeState("end")
-            document.getElementById("player").innerHTML = data.winner
+            document.getElementById("winner").innerHTML = data.winner
             document.getElementById("winner-gold").innerHTML = data.gold
             break
         }
