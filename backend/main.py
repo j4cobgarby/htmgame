@@ -15,6 +15,15 @@ def loaditems(path):
                 d.append((lines[i].strip(), lines[i+1].strip(), lines[i+2].strip()))
         return d
 
+def loadclasses(path):
+    with open(path, "r") as f:
+        lines = f.readlines()
+        d = []
+        for i in range(len(lines)):
+            if i % 3 == 0 and i + 2 < len(lines):
+                d.append((lines[i].strip(), lines[i+1].strip(), lines[i+2].strip()))
+        return d
+
 def load_descriptions_features(path):
     with open(path, "r") as f:
         lines = [l.strip() for l in f.readlines() if len(l.strip()) > 0]
@@ -44,6 +53,7 @@ class Game:
         self.items = loaditems("items.txt")
         self.descriptions = load_descriptions_features("room_descriptions.txt")
         self.features = load_descriptions_features("features.txt")
+        self.classes = loadclasses("class.txt")
         self.players = {}
         self.state = State.LOBBY
 
@@ -150,6 +160,18 @@ class Game:
         player = self.players[client['id']]
         pname = player.name
 
+        if msg['action'] == 'get_status':
+            print(f"{pname} getting status.")
+            response = {
+                'status': 1,
+                'player_id': client['id'],
+                'items': [
+                    self.items[i[0]][0] for i in player.inv
+                ]
+            }
+            self.srv.send_message(client, json.dumps(response))
+            return
+
         match self.state:
             case State.LOBBY:
                 response = {'status': 0, 'message':''}
@@ -157,9 +179,15 @@ class Game:
                     if msg['action'] == 'configure':
                         print(f"{pname} configuring. name: {msg['options']['name']}. class: {msg['options']['playerclass']}.")
                         player.name = msg['options']['name']
-                        player.playerclass = msg['options']['playerclass']
-                        response['status'] = 1
-                        response['message'] = 'configured'
+                        if 0 <= msg['options']['playerclass'] < len(self.classes):
+                            player.playerclass = self.classes[msg['options']['playerclass']]
+                            player.inv.append((msg['options']['playerclass'], [])) # class gets item of ID equal to its class id
+                            response['status'] = 1
+                            response['message'] = 'configured'
+                        else:
+                            response['status'] = 0
+                            response['message'] = 'invalid class id'
+
                     elif msg['action'] == 'start_game':
                         print(f"Starting game!")
                         response['status'] = 1
