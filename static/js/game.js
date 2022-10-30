@@ -64,9 +64,9 @@ function onLoad() {
             changeState("loot-waiting")
             break
         case "request_item_choice":
-            showLootOptions()
-            changeState("loot_choose")
             lootOptions = data.options
+            showLootOptions(lootOptions)
+            changeState("loot_choose")
             break
         }
     })
@@ -258,10 +258,9 @@ function submitSolution() {
     wait()
 }
 
-function showLootOptions() {
+function showLootOptions(lootOptions) {
     var container = document.getElementById("loot-choices")
     container.innerHTML = ""
-    alert("AAAAAAAAAAAA")
 
     for (var option of lootOptions) {
         var el = document.createElement("div")
