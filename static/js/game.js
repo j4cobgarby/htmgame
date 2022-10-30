@@ -29,7 +29,7 @@ var ws
 var inventory = []
 
 function onLoad() {
-    ws = new WebSocket("ws://oliver:6483")
+    ws = new WebSocket("ws://localhost:6483")
 
     ws.addEventListener('message', (event) => {
         console.log('msg: ', event.data)
@@ -106,7 +106,7 @@ function startVote() {
             el.className = "vote-player"
 
             var img = document.createElement("img")
-            img.src = "img/sprites/" + classData[selectedClass].sprite
+            img.src = "img/sprites/" + classData[answer.playerclass].sprite
             el.appendChild(img)
 
             var p = document.createElement("P")
