@@ -213,10 +213,10 @@ class Game:
                             'action': 'all_answers',
                             'players': [
                                 {
-                                    'user': p[1].name,
-                                    'user_id': p[0],
-                                    'item': p[1].item_action[0],
-                                    'message': p[1].item_action[1],
+                                    'user': self.players[p].name,
+                                    'user_id': p,
+                                    'item': self.players[p].item_action[0],
+                                    'message': self.players[p].item_action[1],
                                 } for p in self.players
                             ]
                         }))
