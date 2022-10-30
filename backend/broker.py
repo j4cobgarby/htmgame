@@ -31,7 +31,7 @@ def makecode():
 
     return json.dumps({'code': room_code, 'status': 1})     
 
-@app.route('/broker/getip/<code>')
+@app.route('/broker/getip/<code>', methods=['GET'])
 def get_ip(code):
     try:
         return json.dumps({'ip': games[code.upper()], 'status': 1})
@@ -40,3 +40,11 @@ def get_ip(code):
 
 if __name__ == '__main__':
     app.run(host=socket.gethostname())
+
+@app.route('/broker/removeip/<code>', methods=['POST'])
+def remove_ip(code):
+    try:
+        games.pop(code)
+        return {'status': 1}
+    except:
+        return {'status': 0}

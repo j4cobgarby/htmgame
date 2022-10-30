@@ -61,6 +61,10 @@ function onLoad() {
             showAllAnswers(0)
 
             break
+        case "request_item_choice":
+            changeState("loot_choose")
+            lootOptions = data.options
+            break
         }
     })
 
@@ -226,4 +230,22 @@ function submitSolution() {
     }
 
     ws.send(JSON.stringify(data))
+}
+
+function showLootOptions() {
+    var container = document.getElementById("loot-choices")
+    container.innerHTML = ""
+
+    for (var option of lootOptions) {
+        var el = document.createElement("div")
+        el.className = "item"
+
+        var h2 = document.createElement("h2")
+        h2.innerHTML = option.name
+        el.appendChild(h2)
+
+        var p = document.createElement("p")
+        p.innerHTML = option.description
+        el.appendChild(p)
+    }
 }
