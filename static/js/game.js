@@ -264,6 +264,7 @@ function showLootOptions() {
     for (var option of lootOptions) {
         var el = document.createElement("div")
         el.className = "item"
+        container.append(el)
 
         var h2 = document.createElement("h2")
         h2.innerHTML = option.name
