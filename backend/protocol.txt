@@ -125,36 +125,27 @@ CHOOSE_ITEMS state:
         }
 
 Broker:
-    POST request ./broker/makecode:
+    POST ./broker/makecode:
         returns 
         {
-            'code': 1234,
+            'code': 123456,
             'status': 1
         }
-    if IP already in use:
-        returns 
+    
+    POST ./broker/removecode/<code>:
+        returns
         {
-            'code': null,
+            'status': 1
+        }
+    if code not found
+        {
             'status': 0
         }
 
-    game code is 4 alphanumeric chars (uppercase)
-    GET request ./broker/getip/<GameCode>:
-        returns 
-        {
-            'ip': <ip address>,
-            'status': 1
-        }
-    if code not found:
+    GET ./broker/getinfo/<code>
         returns
         {
-            'ip': null,
-            status: 0
-        }
-
-    POST reqiest ./broker/removeip/<code>:
-        returns
-        {
+            'time_create': 2022-01-01T00:59:59+UTC,
             'status': 1
         }
     if code not found
