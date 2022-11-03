@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import random, json, time, printer, requests, socket
+import random, json, socket
 from enum import Enum
 from websocket_server import WebsocketServer
 
@@ -56,7 +56,7 @@ class Game:
         self.state = State.LOBBY
         self.rooms_visited = 0
 
-        self.srv = WebsocketServer(host="127.0.0.1", port=6483) # Change this to actual hostname for Pi
+        self.srv = WebsocketServer(host="olivermalkin.co.uk", port=6483, cert="/var/www/ssl.cer", key="/var/www/ssl.key") # Change this to actual hostname for Pi
         self.srv.set_fn_new_client(self.new_client)
         self.srv.set_fn_message_received(self.message_received)
         self.srv.set_fn_client_left(self.client_left)
@@ -70,7 +70,7 @@ class Game:
             self.players[client['id']] = Character()
             server.send_message(client, json.dumps({
                 "status": 1,
-                "action": f"join_success"
+                "action": "join_success"
             }))
         else:
             server.send_message(client, json.dumps({

@@ -23,13 +23,11 @@ var sceneNames = [
 ]
 
 var state = "lobby"
-
 var ws
-
 var inventory = []
 
 function onLoad() {
-    ws = new WebSocket("ws://oliver:6483")
+    ws = new WebSocket("wss://avarris.olivermalkin.co.uk:6483")
 
     ws.addEventListener('message', (event) => {
         console.log('msg: ', event.data)

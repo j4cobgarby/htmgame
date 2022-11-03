@@ -1,0 +1,31 @@
+Frontend:
+loot
+Show all items to everyone, but only one person can select. There is a timer to select your loot
+Show the top 3 for that round
+
+formatting of inputs during text input, aka
+Item you are using:
+response here
+
+clear text box upon new item
+
+remove items update on frontend, add some more start items
+
+see you character at the top with your name (almost like a header)
+
+
+
+Backend:
+when game finishes then remove broker join code (if exit)
+
+fix the join and start game (use the broker)
+
+voting for multiple people at times (top 2/3)
+
+
+
+Gameplay:
+
+music
+events
+bosses
