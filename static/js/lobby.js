@@ -28,7 +28,7 @@ function updateName(name) {
 
 function updatePlayerInfo() {
     ws.send(JSON.stringify({
-        "action":"configure", "options": {"name":playerName,"playerclass":selectedClass}
+        "action":"configure", "options": {"name":playerName,"playerclass":selectedClass, "ready_to_start":true}
     }))
 }
 
