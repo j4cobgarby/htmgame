@@ -19,7 +19,8 @@ LOBBY state:
             action: 'configure',
             options: {
                 'name': <desired name>,
-                'playerclass': <desired class id>
+                'playerclass': <desired class id>,
+                'ready_to_start': true if ready to start otherwise false
             }
         }
     server -> client:

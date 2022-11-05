@@ -31,6 +31,7 @@ class Character:
     def __init__(self):
         self.name = ""
         self.playerclass = ""
+        self.ready_to_start = False
         self.inv = []                   # Array of tuples (id, [adj1, adj2, etc.])
         self.vote = None                # ID of a players vote
         self.item_action = (None, None) # Item, action
@@ -80,7 +81,6 @@ class Game:
 
     def change_state(self, state):
         self.state = state
-        #match self.state:
         if self.state == State.LOBBY:
             print("Changing to lobby.")
             self.srv.allow_new_connections()
@@ -156,17 +156,6 @@ class Game:
                             'adjectives': []
                         } for choice in self.selections]
                     }))
-
-            # while len(self.chooser_queue) > 0:
-
-            #     for c in self.srv.clients:
-            #         if self.voter_queue[] == c.id:
-            #             self.srv.send_message(c, json.dumps({
-            #                 'action'self.items[i[0]][0]e': choice[1][0],
-            #                     'description': choice[1][1],
-            #                     'adjectives': []
-            #                 } for choice in enumerate(selections)]
-            #            }))
         elif self.state == State.EVENT_PRESENT:
             pass
         elif self.state == State.EVENT_PICK_ITEMS:
@@ -205,18 +194,24 @@ class Game:
                     if 0 <= msg['options']['playerclass'] < len(self.classes):
                         player.playerclass = self.classes[msg['options']['playerclass']]
                         player.inv = [(msg['options']['playerclass'], [])] # class gets item of ID equal to its class id
+                        player.ready_to_start = msg['options']['ready_to_start']
                         response['status'] = 1
                         response['action'] = 'configured'
                     else:
                         response['status'] = 0
                         response['action'] = 'invalid_class'
-
                 elif msg['action'] == 'start_game':
-                    print(f"Starting game!")
-                    response['status'] = 1
-                    response['action'] = 'starting_game'
-                    self.srv.deny_new_connections()
-                    self.change_state(State.PRESENT_ROOM)
+                    starting = sum([p.ready_to_start for p in self.players]) == len(self.players)
+                    if starting:
+                        print(f"Starting game!")
+                        response['status'] = 1
+                        response['action'] = 'starting_game'
+                        self.srv.deny_new_connections()
+                        self.change_state(State.PRESENT_ROOM)
+                    else:
+                        print(f"Not ready to start yet")
+                        response['status'] = 1
+                        response['action'] = 'not_ready'
             except KeyError:
                 response['action'] = 'incorrect_request'
                 response['status'] = 0
